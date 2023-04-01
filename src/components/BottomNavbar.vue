@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style scoped>
-.bottom-navbar {
+/*.bottom-navbar {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -62,5 +62,5 @@ export default {
 
 .bottom-navbar router-link.active i {
   color: #4CAF50;
-}
+}*/
 </style>
