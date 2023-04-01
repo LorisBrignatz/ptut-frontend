@@ -1,24 +1,47 @@
-<script setup>
+<script>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import BottomNavbar from './components/BottomNavbar.vue';
+import HomePage from './components/HomePage.vue';
+import CreationPage from './components/CreationPage.vue';
+import ProfilePage from './components/ProfilePage.vue';
+import RequestPage from './components/RequestPage.vue';
+import ResearchPage from './components/ResearchPage.vue';
+
+export default {
+  name: 'App',
+  components: {
+    BottomNavbar,
+  },
+  data() {
+    return {
+      title: 'Les Copaings',
+    };
+  },
+  created() {
+    document.title = this.title;
+  },
+  routes: [
+    { path: '/', redirect: '/home' },
+    { path: '/home', component: HomePage },
+    { path: '/creation', component: CreationPage },
+    { path: '/profile', component: ProfilePage },
+    { path: '/request', component: RequestPage },
+    { path: '/research', component: ResearchPage },
+  ],
+};
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="app">
+    <router-view/>
+    <BottomNavbar/>
+  </div>
 </template>
 
 <style scoped>
-header {
+/*header {
   line-height: 1.5;
 }
 
@@ -43,5 +66,5 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
-}
+}*/
 </style>
