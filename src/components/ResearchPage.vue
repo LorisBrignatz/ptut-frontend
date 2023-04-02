@@ -3,8 +3,8 @@ export default {
   name: "ResearchPage"
 }
 
-defineProps(["trajet"]);
-const emit = defineEmits(["search"]);
+/*defineProps(["trajet"]);
+const emit = defineEmits(["search"]);*/
 </script>
 
 <template>
