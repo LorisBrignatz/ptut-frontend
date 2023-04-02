@@ -1,25 +1,26 @@
 <template>
-  <div class="bottom-navbar">
-    <router-link to="/research">
-      <i class="fa fa-user"></i>
-      <span>Rechercher</span>
-    </router-link>
-    <router-link to="/creation">
-      <i class="fa fa-car"></i>
-      <span>Créer</span>
-    </router-link>
-    <router-link to="/home">
-      <i class="fa fa-home"></i>
-      <span>Accueil</span>
-    </router-link>
-    <router-link to="/request">
-      <i class="fa fa-user"></i>
-      <span>Demander</span>
-    </router-link>
-    <router-link to="/profile">
-      <i class="fa fa-user"></i>
-      <span>Profil</span>
-    </router-link>
+  <div class="container stage">
+    <div class="container">
+      <div class="tabbar tab-style4">
+        <ul class="flex-center">
+          <li class="search" data-where="search"><span class="material-icons-outlined">
+            search
+          </span></li>
+          <li class="add-circle" data-where="add-circle"><span class="material-icons-outlined">
+            add
+          </span></li>
+          <li class="home active" data-where="home"><span class="material-icons-outlined">
+            home
+          </span></li>
+          <li class="request" data-where="request"><span class="material-icons-outlined">
+            add_comment
+          </span></li>
+          <li class="profile" data-where="profile"><span class="material-icons-outlined">
+            person
+          </span></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -62,7 +63,7 @@ export default {
 
 .bottom-navbar router-link.active i {
   color: #4CAF50;
-}*/
+}
 .bottom-navbar {
   display: flex;
   justify-content: space-around;
@@ -156,6 +157,5 @@ export default {
   to {
     transform: translateY(100%);
   }
-}
-
+}*/
 </style>

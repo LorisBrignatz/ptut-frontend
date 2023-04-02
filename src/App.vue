@@ -2,6 +2,8 @@
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import BottomNavbar from './components/BottomNavbar.vue';
+import './components/BottomNavbar.scss';
+import './components/BottomNavbar';
 import HomePage from './components/HomePage.vue';
 import CreationPage from './components/CreationPage.vue';
 import ProfilePage from './components/ProfilePage.vue';
@@ -36,8 +38,8 @@ export default {
 <template>
   <div id="app">
     <router-view/>
-    <BottomNavbar/>
   </div>
+  <BottomNavbar/>
 </template>
 
 <style scoped>

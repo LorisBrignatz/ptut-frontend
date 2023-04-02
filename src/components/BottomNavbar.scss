@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
+
+:root {
+  --accent-color: #02619a;
+  --accent-color-fg: #fefefe;
+  --backdrop-color: #ffffff;
+  --app-content-background-color: #ffffff;
+  --inset-shadow: rgba(7, 43, 74, 0.3);
+  --outset-shadow: rgba(223, 240, 255, 0.25);
+  --clay-box-shadow: rgba(7, 43, 74, 0.3);
+  --clay-background-color: #c0d8ec;
+  --clay-fg-color: #444;
+}
+
+body {
+  background-color: var(--backdrop-color);
+  font-size: 10px;
+  font-family: "Roboto", sans-serif;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.container {
+  /*padding: 0px;*/
+  position: relative;
+  margin-bottom: 0px;
+  width: 100%;
+}
+
+.stage {
+  max-width: 400px;
+  width: 500px;
+  /*margin: 1rem auto 2rem;*/
+}
+
+.home {
+  &.active {
+    color: var(--accent-color);
+  }
+}
+
+.products {
+  &.active {
+    --outset-shadow: rgba(247, 167, 103, 0.45);
+    --inset-shadow: rgba(149, 62, 8, 0.45);
+    --clay-box-shadow: rgba(211, 69, 20, 0.4);
+    --clay-background-color: #d34514;
+    --clay-fg-color: #f1f2f3;
+
+    color: #690c0c;
+  }
+}
+.services {
+  &.active {
+    --outset-shadow: rgba(255, 159, 40, 0.45);
+    --inset-shadow: rgba(88, 54, 13, 0.45);
+    --clay-box-shadow: rgba(88, 54, 13, 0.4);
+    --clay-background-color: #ed9426;
+    --clay-fg-color: #f1f2f3;
+
+    color: #cf5c0f;
+  }
+}
+
+.about {
+  &.active {
+    --outset-shadow: rgba(93, 255, 85, 0.45);
+    --inset-shadow: rgba(28, 78, 26, 0.45);
+    --clay-box-shadow: rgba(28, 78, 26, 0.4);
+    --clay-background-color: #4dd146;
+    --clay-fg-color: #f1f2f3;
+
+    color: #4dd146;
+  }
+}
+  .help {
+    &.active {
+      --outset-shadow: rgba(230, 230, 230, 0.45);
+      --inset-shadow: rgba(81, 81, 81, 0.45);
+      --clay-box-shadow: rgba(81, 81, 81, 0.4);
+      --clay-background-color: #a3a3a3;
+      --clay-fg-color: #f1f2f3;
+
+      color: #783896;
+    }
+  }
+
+  .tabbar {
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    ul,
+    li {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      background-color: var(--app-content-background-color);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      align-self: flex-end;
+      justify-content: center;
+      height: 50px;
+    }
+
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+      margin-right: 5px;
+      transition: all 0.4s;
+      background-color: #f9f8fa;
+      width: 60px;
+      height: 60px;
+      position: relative;
+      color: #888;
+      cursor: pointer;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+.tab-style4 {
+  li {
+    width: 60px;
+    height: 40px;
+    flex-direction: column;
+    overflow: hidden;
+
+    span {
+      position: relative;
+      top: 3px;
+      transition: top 0.4s ease-out, font-size 0.2s ease-out;
+      text-shadow: inset 2px 2px 4px var(--clay-box-shadow);
+    }
+
+    &:after {
+      width: 100%;
+      height: 10px;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 8px;
+      font-weight: bold;
+      position: relative;
+      bottom: -30px;
+      opacity: 0;
+      transition: bottom 0.2s ease-out, opacity 0.4s ease-out;
+    }
+
+    &.active:after {
+      opacity: 1;
+      bottom: 2px;
+      text-shadow: inset 2px 2px 8px var(--clay-box-shadow);
+    }
+
+    &:nth-child(1) {
+      &:after {
+        content: "home";
+      }
+    }
+
+    &:nth-child(2) {
+      &:after {
+        content: "products";
+      }
+    }
+
+    &:nth-child(3) {
+      &:after {
+        content: "services";
+      }
+    }
+
+    &:nth-child(4) {
+      &:after {
+        content: "company";
+      }
+    }
+
+    &:nth-child(5) {
+      &:after {
+        content: "help";
+      }
+    }
+  }
+
+  .active {
+    span {
+      font-size: 1.1rem;
+      top: -4px;
+    }
+  }
+}
