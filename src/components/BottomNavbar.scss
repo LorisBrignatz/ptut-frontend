@@ -15,7 +15,7 @@
 body {
   background-color: var(--backdrop-color);
   font-size: 10px;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Blinker', sans-serif;
 }
 
 .flex-center {
@@ -43,7 +43,7 @@ body {
   }
 }
 
-.products {
+.request {
   &.active {
     --outset-shadow: rgba(247, 167, 103, 0.45);
     --inset-shadow: rgba(149, 62, 8, 0.45);
@@ -54,7 +54,7 @@ body {
     color: #690c0c;
   }
 }
-.services {
+.search {
   &.active {
     --outset-shadow: rgba(255, 159, 40, 0.45);
     --inset-shadow: rgba(88, 54, 13, 0.45);
@@ -66,7 +66,7 @@ body {
   }
 }
 
-.about {
+.profile {
   &.active {
     --outset-shadow: rgba(93, 255, 85, 0.45);
     --inset-shadow: rgba(28, 78, 26, 0.45);
@@ -77,7 +77,7 @@ body {
     color: #4dd146;
   }
 }
-  .help {
+  .add-circle {
     &.active {
       --outset-shadow: rgba(230, 230, 230, 0.45);
       --inset-shadow: rgba(81, 81, 81, 0.45);
@@ -132,7 +132,7 @@ body {
       }
     }
   }
-.tab-style4 {
+.tab-style {
   li {
     width: 60px;
     height: 40px;
@@ -167,31 +167,31 @@ body {
 
     &:nth-child(1) {
       &:after {
-        content: "home";
+        content: "Rechercher";
       }
     }
 
     &:nth-child(2) {
       &:after {
-        content: "products";
+        content: "Créer";
       }
     }
 
     &:nth-child(3) {
       &:after {
-        content: "services";
+        content: "Accueil";
       }
     }
 
     &:nth-child(4) {
       &:after {
-        content: "company";
+        content: "Demander";
       }
     }
 
     &:nth-child(5) {
       &:after {
-        content: "help";
+        content: "Profil";
       }
     }
   }

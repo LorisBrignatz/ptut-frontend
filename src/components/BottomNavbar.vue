@@ -1,7 +1,7 @@
 <template>
   <div class="container stage">
     <div class="container">
-      <div class="tabbar tab-style4">
+      <div class="tabbar tab-style">
         <ul class="flex-center">
           <li class="search" data-where="search"><span class="material-icons-outlined">
             search
