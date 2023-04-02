@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');
 
 :root {
-  --accent-color: #02619a;
+  --accent-color: #cab174;
   --accent-color-fg: #fefefe;
   --backdrop-color: #ffffff;
   --app-content-background-color: #ffffff;
@@ -45,47 +45,23 @@ body {
 
 .request {
   &.active {
-    --outset-shadow: rgba(247, 167, 103, 0.45);
-    --inset-shadow: rgba(149, 62, 8, 0.45);
-    --clay-box-shadow: rgba(211, 69, 20, 0.4);
-    --clay-background-color: #d34514;
-    --clay-fg-color: #f1f2f3;
-
-    color: #690c0c;
+    color: var(--accent-color);
   }
 }
 .search {
   &.active {
-    --outset-shadow: rgba(255, 159, 40, 0.45);
-    --inset-shadow: rgba(88, 54, 13, 0.45);
-    --clay-box-shadow: rgba(88, 54, 13, 0.4);
-    --clay-background-color: #ed9426;
-    --clay-fg-color: #f1f2f3;
-
-    color: #cf5c0f;
+    color: var(--accent-color);
   }
 }
 
 .profile {
   &.active {
-    --outset-shadow: rgba(93, 255, 85, 0.45);
-    --inset-shadow: rgba(28, 78, 26, 0.45);
-    --clay-box-shadow: rgba(28, 78, 26, 0.4);
-    --clay-background-color: #4dd146;
-    --clay-fg-color: #f1f2f3;
-
-    color: #4dd146;
+    color: var(--accent-color);
   }
 }
   .add-circle {
     &.active {
-      --outset-shadow: rgba(230, 230, 230, 0.45);
-      --inset-shadow: rgba(81, 81, 81, 0.45);
-      --clay-box-shadow: rgba(81, 81, 81, 0.4);
-      --clay-background-color: #a3a3a3;
-      --clay-fg-color: #f1f2f3;
-
-      color: #783896;
+      color: var(--accent-color);
     }
   }
 
@@ -109,7 +85,7 @@ body {
       bottom: 0;
       width: 100%;
       align-self: flex-end;
-      justify-content: center;
+      justify-content: space-between;
       height: 50px;
     }
 
@@ -120,11 +96,11 @@ body {
       font-size: 1rem;
       margin-right: 5px;
       transition: all 0.4s;
-      background-color: #f9f8fa;
+      background-color: #ffffff;
       width: 60px;
       height: 60px;
       position: relative;
-      color: #888;
+      color: #181c32;
       cursor: pointer;
 
       &:last-child {
