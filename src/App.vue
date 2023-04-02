@@ -5,14 +5,15 @@ import BottomNavbar from './components/BottomNavbar.vue';
 import './components/BottomNavbar.scss';
 import './components/BottomNavbar';
 import HomePage from './components/HomePage.vue';
-import CreationPage from './components/CreationPage.vue';
 import ProfilePage from './components/ProfilePage.vue';
 import RequestPage from './components/RequestPage.vue';
 import ResearchPage from './components/ResearchPage.vue';
+import CreationPage from "@/components/CreationPage.vue";
 
 export default {
   name: 'App',
   components: {
+    CreationPage,
     BottomNavbar,
   },
   data() {
@@ -28,6 +29,7 @@ export default {
 </script>
 
 <template>
+  <CreationPage />
   <div id="app">
     <router-view></router-view>
   </div>
