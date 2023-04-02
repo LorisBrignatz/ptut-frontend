@@ -1,11 +1,14 @@
 export default class Trajet {
-    constructor(id, pointdepart, pointpassage, pointarrivee, date, heure) {
+    constructor(id, pointdepart, pointpassage, pointarrivee, date, heure, nbPlaces, recurrent, frequence) {
         this._pointdepart = pointdepart;
         this._pointpassage = pointpassage;
         this._id = id;
         this._pointarrivee = pointarrivee;
         this._date = date;
         this._heure = heure;
+        this._nbPlaces = nbPlaces;
+        this._recurrent = recurrent;
+        this._frequence = frequence;
     }
     get pointdepart() {
         return this._pointdepart;
@@ -25,6 +28,15 @@ export default class Trajet {
     get heure(){
         return this._heure;
     }
+    get nbPlaces(){
+        return this._nbPlaces;
+    }
+    get recurrent(){
+        return this._recurrent;
+    }
+    get frequence(){
+        return this._frequence;
+    }
     set pointdepart(pointdepart){
         this._pointdepart = pointdepart;
     }
@@ -39,6 +51,15 @@ export default class Trajet {
     }
     set heure(heure){
         this._heure = heure;
+    }
+    set nbPlaces(nbPlaces){
+        this._nbPlaces = nbPlaces;
+    }
+    set recurrent(recurrent){
+        this._recurrent = recurrent
+    }
+    set frequence(frequence){
+        this._frequence = frequence;
     }
     pourAfficher() {
         return `${this._pointdepart} ${this._pointpassage} ${this._pointarrivee} ${this._date} ${this._heure}`;
