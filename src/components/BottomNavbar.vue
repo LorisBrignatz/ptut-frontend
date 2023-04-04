@@ -6,12 +6,16 @@
           <li class="search" data-where="search"><span class="material-icons-outlined">
             search
           </span></li>
-          <li class="add-circle" data-where="add-circle"><span class="material-icons-outlined">
-            add
-          </span></li>
-          <li class="home active" data-where="home"><span class="material-icons-outlined">
-            home
-          </span></li>
+          <li class="add-circle" data-where="add-circle">
+            <RouterLink to="/creation">
+              <span class="material-icons-outlined">add</span>
+            </RouterLink>
+          </li>
+          <li class="home" :class="{ active: currentTab === 'home' }" data-where="home" @click="setCurrentTab('home')">
+            <RouterLink to="/">
+              <span class="material-icons-outlined">home</span>
+            </RouterLink>
+          </li>
           <li class="request" data-where="request"><span class="material-icons-outlined">
             add_comment
           </span></li>
@@ -26,38 +30,45 @@
 
 <script>
 export default {
-  name: "BottomNavbar"
-}
-const uls = document.querySelectorAll("ul");
+  name: "BottomNavbar",
+  data() {
+    return {
+      currentTab: "home",
+    };
+  },
+  methods: {
+    setCurrentTab(tab) {
+      this.currentTab = tab;
+    },
+  },
+  mounted() {
+    const uls = document.querySelectorAll("ul");
 
-uls.forEach((ul) => {
-  const resetClass = ul.parentNode.getAttribute("class");
-  const lis = ul.querySelectorAll("li");
+    uls.forEach((ul) => {
+      const resetClass = ul.parentNode.getAttribute("class");
+      const lis = ul.querySelectorAll("li");
 
-  lis.forEach((li) => {
-    li.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const target = e.currentTarget;
+      lis.forEach((li) => {
+        li.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const target = e.currentTarget;
 
-      if (
-          target.classList.contains("active") ||
-          target.classList.contains("follow")
-      ) {
-        return;
-      }
+          ul.parentNode.setAttribute(
+              "class",
+              `${resetClass} ${target.getAttribute("data-where")}-style`
+          );
 
-      ul.parentNode.setAttribute(
-          "class",
-          `${resetClass} ${target.getAttribute("data-where")}-style`
-      );
+          lis.forEach((item) => clearClass(item, "active"));
 
-      lis.forEach((item) => clearClass(item, "active"));
+          setClass(target, "active");
 
-      setClass(target, "active");
+          this.setCurrentTab(target.getAttribute("data-where"));
+        });
+      });
     });
-  });
-});
+  },
+};
 
 function clearClass(node, className) {
   node.classList.remove(className);
@@ -73,14 +84,6 @@ function setClass(node, className) {
 
 :root {
   --accent-color: #cab174;
-  --accent-color-fg: #fefefe;
-  --backdrop-color: #ffffff;
-  --app-content-background-color: #ffffff;
-  --inset-shadow: rgba(7, 43, 74, 0.3);
-  --outset-shadow: rgba(223, 240, 255, 0.25);
-  --clay-box-shadow: rgba(7, 43, 74, 0.3);
-  --clay-background-color: #c0d8ec;
-  --clay-fg-color: #444;
 }
 
 body {
@@ -100,11 +103,6 @@ body {
   left: 0;
   margin-bottom: 0px;
   width: 100%;
-}
-
-.stage {
-  max-width: 400px;
-  width: 500px;
 }
 
 .home {
@@ -134,12 +132,6 @@ body {
    color: var(--accent-color);
  }
 }
-
-.tabbar {
-  height: 120px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
 
 ul,
 li {
@@ -173,24 +165,24 @@ li {
   color: #181c32;
   cursor: pointer;
 
-&:last-child {
+/*&:last-child {
    margin-right: 0;
- }
+ }*/
 }
-}
+
 .tab-style {
 li {
-  width: 60px;
+  width: 80px;
   height: 40px;
   flex-direction: column;
   overflow: hidden;
 
-span {
+/*span {
   position: relative;
   top: 3px;
   transition: top 0.4s ease-out, font-size 0.2s ease-out;
   text-shadow: inset 2px 2px 4px var(--clay-box-shadow);
-}
+}*/
 
 &:after {
    width: 100%;
@@ -248,5 +240,11 @@ span {
   top: -4px;
 }
 }
+}
+.material-icons-outlined {
+  color: #181c32;
+}
+.active .material-icons-outlined {
+  color: #cab174;
 }
 </style>
