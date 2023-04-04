@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Home from './components/HomePage.vue'
-import CreationView from './views/CreationView.vue'
+import Home from '../components/HomePage.vue'
+import CreationView from '../views/CreationView.vue'
 /*import Profile from './components/ProfilePage.vue'
 import Request from './components/RequestPage.vue'
 import Research from './components/ResearchPage.vue'*/
@@ -23,7 +23,7 @@ const router = createRouter({
             path: '/creation',
             name: 'Créer',
             component: CreationView
-        },
+        }
       /*  {
             path: '/request',
             name: 'Demander',
@@ -36,6 +36,4 @@ const router = createRouter({
         }*/
     ]
 })
-
 export default router
-

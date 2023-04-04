@@ -7,7 +7,7 @@ import BottomNavbar from "./components/BottomNavbar.vue";
   <div id="app">
     <nav>
       <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/creation">About</RouterLink>
+      <RouterLink to="/creation">Créer</RouterLink>
     </nav>
   </div>
   <RouterView />
