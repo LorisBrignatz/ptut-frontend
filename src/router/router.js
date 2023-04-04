@@ -3,9 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/HomePage.vue'
 import CreationView from '../views/CreationView.vue'
 import ResearchView from '../views/ResearchView.vue'
-/*import Profile from './components/ProfilePage.vue'
-import Request from './components/RequestPage.vue'*/
-
+import RequestView from '../views/RequestView.vue'
+/*import Profile from './components/ProfilePage.vue'*/
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,13 +23,13 @@ const router = createRouter({
             path: '/creation',
             name: 'Créer',
             component: CreationView
-        }
-      /*  {
-            path: '/request',
-            name: 'Demander',
-            component: Request
         },
         {
+            path: '/request',
+            name: 'Demander',
+            component: RequestView
+        }
+        /*{
             path: '/profile',
             name: 'Profil',
             component: Profile

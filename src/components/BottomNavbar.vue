@@ -18,9 +18,11 @@
               <span class="material-icons-outlined">home</span>
             </RouterLink>
           </li>
-          <li class="request" data-where="request"><span class="material-icons-outlined">
-            add_comment
-          </span></li>
+          <li class="request" data-where="request">
+            <RouterLink to="/request">
+              <span class="material-icons-outlined">add_comment</span>
+            </RouterLink>
+          </li>
           <li class="profile" data-where="profile"><span class="material-icons-outlined">
             person
           </span></li>
