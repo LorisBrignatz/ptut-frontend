@@ -2,9 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../components/HomePage.vue'
 import CreationView from '../views/CreationView.vue'
+import ResearchView from '../views/ResearchView.vue'
 /*import Profile from './components/ProfilePage.vue'
-import Request from './components/RequestPage.vue'
-import Research from './components/ResearchPage.vue'*/
+import Request from './components/RequestPage.vue'*/
+
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,11 +15,11 @@ const router = createRouter({
             name: 'Accueil',
             component: Home
         },
-       /* {
+        {
             path: '/search',
             name: 'Rechercher',
-            component: Research
-        },*/
+            component: ResearchView
+        },
         {
             path: '/creation',
             name: 'Créer',

@@ -3,9 +3,11 @@
     <div class="container">
       <div class="tabbar tab-style">
         <ul class="flex-center">
-          <li class="search" data-where="search"><span class="material-icons-outlined">
-            search
-          </span></li>
+          <li class="search" data-where="search">
+            <RouterLink to="/search">
+              <span class="material-icons-outlined">search</span>
+            </RouterLink>
+          </li>
           <li class="add-circle" data-where="add-circle">
             <RouterLink to="/creation">
               <span class="material-icons-outlined">add</span>
