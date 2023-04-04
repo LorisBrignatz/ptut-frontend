@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from './components/HomePage.vue'
 import Creation from './components/CreationPage.vue'
@@ -7,9 +6,8 @@ import Profile from './components/ProfilePage.vue'
 import Request from './components/RequestPage.vue'
 import Research from './components/ResearchPage.vue'
 
-Vue.use(VueRouter)
-
-export default new VueRouter({
+const router = createRouter({
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
             path: '/',
@@ -39,4 +37,5 @@ export default new VueRouter({
     ]
 })
 
+export default router
 
