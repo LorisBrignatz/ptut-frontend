@@ -23,9 +23,11 @@
               <span class="material-icons-outlined">add_comment</span>
             </RouterLink>
           </li>
-          <li class="profile" data-where="profile"><span class="material-icons-outlined">
-            person
-          </span></li>
+          <li class="profile" data-where="profile">
+            <RouterLink to="/profile">
+              <span class="material-icons-outlined">person</span>
+            </RouterLink>
+          </li>
         </ul>
       </div>
     </div>
