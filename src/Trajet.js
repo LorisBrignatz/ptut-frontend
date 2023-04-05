@@ -1,66 +1,71 @@
 export default class Trajet {
-    constructor(id, pointdepart, pointpassage, pointarrivee, date, heure, nbPlaces, recurrent, frequence) {
+    constructor(numTrajet, conducteur,date, heure ,pointdepart, pointarrivee, datefin) {
+        this._numTrajet = numTrajet;
+        this._conducteur = conducteur;
         this._pointdepart = pointdepart;
-        this._pointpassage = pointpassage;
-        this._id = id;
         this._pointarrivee = pointarrivee;
         this._date = date;
         this._heure = heure;
-        this._nbPlaces = nbPlaces;
-        this._recurrent = recurrent;
-        this._frequence = frequence;
+        this._datefin = datefin;
+
     }
+    // Getters
+    get numTrajet() {
+        return this._numTrajet;
+    }
+
+    get conducteur() {
+        return this._conducteur;
+    }
+
     get pointdepart() {
         return this._pointdepart;
     }
-    get id() {
-        return this._id;
-    }
-    get pointpassage() {
-        return this._pointpassage;
-    }
+
     get pointarrivee() {
         return this._pointarrivee;
     }
-    get date(){
+
+    get date() {
         return this._date;
     }
-    get heure(){
+    get datefin() {
+        return this._datefin;
+    }
+
+
+    get heure() {
         return this._heure;
     }
-    get nbPlaces(){
-        return this._nbPlaces;
+
+    // Setters
+    set numTrajet(value) {
+        this._numTrajet = value;
     }
-    get recurrent(){
-        return this._recurrent;
+
+    set conducteur(value) {
+        this._conducteur = value;
     }
-    get frequence(){
-        return this._frequence;
+
+    set pointdepart(value) {
+        this._pointdepart = value;
     }
-    set pointdepart(pointdepart){
-        this._pointdepart = pointdepart;
+
+    set pointarrivee(value) {
+        this._pointarrivee = value;
     }
-    set pointpassage(pointpassage){
-        this._pointpassage = pointpassage;
+
+    set date(value) {
+        this._date = value;
     }
-    set pointarrivee(pointarrivee){
-        this._pointarrivee = pointarrivee;
+    set datefin(value) {
+        this._datefin = value;
     }
-    set date(date){
-        this._date = date;
+
+    set heure(value) {
+        this._heure = value;
     }
-    set heure(heure){
-        this._heure = heure;
-    }
-    set nbPlaces(nbPlaces){
-        this._nbPlaces = nbPlaces;
-    }
-    set recurrent(recurrent){
-        this._recurrent = recurrent
-    }
-    set frequence(frequence){
-        this._frequence = frequence;
-    }
+
     pourAfficher() {
         return `${this._pointdepart} ${this._pointpassage} ${this._pointarrivee} ${this._date} ${this._heure}`;
     }

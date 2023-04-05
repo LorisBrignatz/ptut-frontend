@@ -1,5 +1,53 @@
 <script setup>
-/*import { reactive, onMounted } from "vue";
+import { reactive, onMounted } from "vue";
+import { BACKEND, doAjaxRequest } from "../api";
+
+/*
+let data = reactive({
+  // Les données saisies dans le formulaire
+  formulaireCategorie: { ...categorieVide },
+  // La liste des catégories affichée sous forme de table
+  listeTrajets: []
+});
+
+ */
+const listeTrajets = reactive([]);
+
+function chargeTrajets() {
+  const fetchOptions = { method: "GET", mode:'cors'};
+  fetch(BACKEND + "/api/trajets", fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        listeTrajets.splice(0, listeTrajets.length);
+        dataJSON.forEach((t) =>
+            listeTrajets.push(new Trajet(t.numTrajet, t.conducteur, t.pointdepart, t.pointarrivee, t.date, t.heure), t.datefin)
+        );
+      })
+      .catch((error) => console.log(error));
+
+}
+
+
+/**
+ * Supprime une entité
+ * @param entityRef l'URI de l'entité à supprimer
+ */
+function deleteEntity(entityRef) {
+  doAjaxRequest(entityRef, { method: "DELETE" })
+      .then(chargeCategories)
+      .catch((error) => alert(error.message));
+}
+
+// A l'affichage du composant, on affiche la liste
+onMounted(chargeTrajets);
+
+
+
+
+/*
 import CreationPage from "./CreationPage.vue";
 import Trajet from "../Trajet";
 import ResearchPage from "@/components/ResearchPage.vue";
@@ -120,6 +168,12 @@ onMounted(() => {
 
 
 <template>
+  <TrajetItem
+      v-for="trajet of listeTrajets"
+      :key="trajet.numTrajet"
+      :trajet="trajet"
+      @deleteC="handlerDelete"
+  />
 
 </template>
 
