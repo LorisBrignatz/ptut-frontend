@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, onMounted } from "vue";
 import { BACKEND, doAjaxRequest } from "../api";
+import axios from "axios";
 
 /*
 let data = reactive({
@@ -14,7 +15,19 @@ let data = reactive({
 const listeTrajets = reactive([]);
 
 function chargeTrajets() {
-  const fetchOptions = { method: "GET", mode:'cors'};
+
+  axios.get('http://localhost:8989/api/trajets')
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  /*
+  const fetchOptions = { method: "GET",  headers: {
+      "Content-Type": "application/json",
+      'Access-Control-Allow-Origin': 'http://localhost:8989/'
+    },};
   fetch(BACKEND + "/api/trajets", fetchOptions)
       .then((response) => {
         return response.json();
@@ -28,6 +41,8 @@ function chargeTrajets() {
       })
       .catch((error) => console.log(error));
 
+
+   */
 }
 
 
