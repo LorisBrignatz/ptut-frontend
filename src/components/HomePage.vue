@@ -2,6 +2,7 @@
 import { reactive, onMounted } from "vue";
 import { BACKEND, doAjaxRequest } from "../api";
 import axios from "axios";
+import Trajet from "../Trajet.js";
 
 /*
 let data = reactive({
@@ -18,11 +19,18 @@ function chargeTrajets() {
 
   axios.get('http://localhost:8989/api/trajets')
       .then(response => {
-        console.log(response.data)
+        console.log(response.data);
+
+        listeTrajets.splice(0, listeTrajets.length);
+        response.data._embedded.trajets.forEach((trajets) => {
+          listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heure, trajets.datefin));
+        });
+
       })
       .catch(error => {
-        console.log(error)
-      })
+        console.log(error);
+      });
+
   /*
   const fetchOptions = { method: "GET",  headers: {
       "Content-Type": "application/json",
@@ -187,7 +195,7 @@ onMounted(() => {
       v-for="trajet of listeTrajets"
       :key="trajet.numTrajet"
       :trajet="trajet"
-      @deleteC="handlerDelete"
+
   />
 
 </template>
