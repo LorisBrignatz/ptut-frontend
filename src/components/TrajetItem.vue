@@ -1,9 +1,10 @@
-<script>
+<script setup>
 defineProps(["trajet"]);
 const emit = defineEmits(["deleteC"]);
 </script>
 
 <template>
+  <h1>Test</h1>
   <div class="trip">
     <div class="trip-details">
       <h2 class="trip-driver">{{ trajet.conducteur }}</h2>

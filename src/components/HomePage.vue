@@ -3,6 +3,7 @@ import { reactive, onMounted } from "vue";
 import { BACKEND, doAjaxRequest } from "../api";
 import axios from "axios";
 import Trajet from "../Trajet.js";
+import TrajetItem from "@/components/TrajetItem.vue"
 
 /*
 let data = reactive({
