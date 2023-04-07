@@ -18,7 +18,7 @@ const listeTrajets = reactive([]);
 
 function chargeTrajets() {
 
-  axios.get('http://localhost:8989/api/trajets')
+  axios.get(BACKEND+'/trajets')
       .then(response => {
         console.log(response.data);
 
@@ -60,10 +60,23 @@ function chargeTrajets() {
  * Supprime une entité
  * @param entityRef l'URI de l'entité à supprimer
  */
-function deleteEntity(entityRef) {
-  doAjaxRequest(entityRef, { method: "DELETE" })
-      .then(chargeCategories)
-      .catch((error) => alert(error.message));
+function deleteTrajet(numTrajet) {
+  alert(numTrajet);
+  const fetchOptions = {
+    method: "DELETE",
+    mode: "cors"
+  };
+  fetch(BACKEND + "/trajets/" + numTrajet, fetchOptions)
+      .then((response) => {
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        alert("je fonctionne");
+
+        chargeTrajets();
+      })
+      .catch((error) => console.log(error));
 }
 
 // A l'affichage du composant, on affiche la liste
@@ -197,6 +210,7 @@ onMounted(() => {
       v-for="trajet of listeTrajets"
       :key="trajet.numTrajet"
       :trajet="trajet"
+      @deleteC="deleteTrajet"
   />
 
 </template>
