@@ -25,6 +25,7 @@ function chargeTrajets() {
         listeTrajets.splice(0, listeTrajets.length);
         response.data._embedded.trajets.forEach((trajets) => {
           listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heure, trajets.datefin));
+
         });
 
       })
@@ -196,7 +197,6 @@ onMounted(() => {
       v-for="trajet of listeTrajets"
       :key="trajet.numTrajet"
       :trajet="trajet"
-
   />
 
 </template>

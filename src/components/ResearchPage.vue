@@ -1,10 +1,7 @@
-<script>
-export default {
-  name: "ResearchPage"
-}
+<script setup>
 
-/*defineProps(["trajet"]);
-const emit = defineEmits(["search"]);*/
+defineProps(["trajet"]);
+const emit = defineEmits(["search"]);
 </script>
 
 <template>
