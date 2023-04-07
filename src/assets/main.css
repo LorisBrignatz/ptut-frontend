@@ -32,7 +32,6 @@ a,.green {
     padding: 0 2rem;
   }
 }
-
 @font-face {
   font-family: 'Blinker';
   src: url('~@/assets/fonts/Blinker-Regular.ttf') format('truetype');

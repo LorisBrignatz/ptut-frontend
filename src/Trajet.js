@@ -1,5 +1,5 @@
 export default class Trajet {
-    constructor(numTrajet, conducteur,date, heure ,pointdepart, pointarrivee, datefin) {
+    constructor(numTrajet, conducteur, pointdepart, pointarrivee, date, heure, datefin) {
         this._numTrajet = numTrajet;
         this._conducteur = conducteur;
         this._pointdepart = pointdepart;
@@ -64,9 +64,5 @@ export default class Trajet {
 
     set heure(value) {
         this._heure = value;
-    }
-
-    pourAfficher() {
-        return `${this._pointdepart} ${this._pointpassage} ${this._pointarrivee} ${this._date} ${this._heure}`;
     }
 }
