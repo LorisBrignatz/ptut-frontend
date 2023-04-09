@@ -31,7 +31,7 @@ function chargeTrajets() {
         console.log(dataJSON);
         listeTrajets.splice(0, listeTrajets.length);
         dataJSON._embedded.trajets.forEach((trajets) => {
-          listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heure, trajets.datefin));
+          listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heuredepart, trajets.datefin));
       })})
       .catch((error) => console.log(error));
 
