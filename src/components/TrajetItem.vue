@@ -1,15 +1,82 @@
 <script setup>
-defineProps(["trajet"]);
+import Trajet from "@/Trajet";
+import { onMounted, ref, defineProps} from "vue";
+import {BACKEND} from "@/api";
+
+const props = defineProps({
+  trajet: Trajet
+});
 const emit = defineEmits(["deleteC"]);
+
+const name = ref('');
+const pointdepartName = ref('');
+const pointarriveeName = ref('');
+
+function getName(){
+  const fetchOptions = {method: "GET", mode:'cors'};
+  const url = BACKEND+'/utilisateurs/search/findByUserid?userid='+ props.trajet.conducteur
+  console.log(url)
+  fetch(url, fetchOptions)
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        name.value = dataJSON.nom + ' ' + dataJSON.prenom;
+      })
+
+      .catch((error) => console.log(error));
+}
+
+function getPointDepart(){
+  const fetchOptions = {method: "GET", mode:'cors'};
+  const url = BACKEND+'/points/search/findByIdpoint?idpoint='+ props.trajet.pointdepart
+  console.log(url)
+  fetch(url, fetchOptions)
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        pointdepartName.value = dataJSON.nom ;
+      })
+
+      .catch((error) => console.log(error));
+}
+function getPointArrivee(){
+  const fetchOptions = {method: "GET", mode:'cors'};
+  const url = BACKEND+'/points/search/findByIdpoint?idpoint='+ props.trajet.pointarrivee
+  console.log(url)
+  fetch(url, fetchOptions)
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        pointarriveeName.value = dataJSON.nom ;
+      })
+
+      .catch((error) => console.log(error));
+}
+onMounted(() => {
+  getName();
+  getPointArrivee();
+  getPointDepart();
+});
 </script>
+
 
 <template>
   <h1>Test</h1>
   <div class="trip">
     <div class="trip-details">
-      <h2 class="trip-driver">{{ trajet.conducteur }}</h2>
-      <p class="trip-start">Départ: {{ trajet.pointdepart }}</p>
-      <p class="trip-end">Arrivée: {{ trajet.pointarrivee }}</p>
+      <!--<h2 class="trip-id">{{ trajet.numTrajet }}</h2>-->
+      <h2 class="trip-driver">{{ name }}</h2>
+      <p class="trip-start">Départ: {{ pointdepartName }}</p>
+      <p class="trip-end">Arrivée: {{ pointarriveeName }}</p>
       <p class="trip-date">Date: {{ trajet.date }}</p>
       <p class="trip-time">Heure: {{ trajet.heure }}</p>
       <div class="trip-buttons-delete">

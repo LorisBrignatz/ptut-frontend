@@ -5,82 +5,65 @@ import axios from "axios";
 import Trajet from "../Trajet.js";
 import TrajetItem from "@/components/TrajetItem.vue"
 
-/*
-let data = reactive({
-  // Les données saisies dans le formulaire
-  formulaireCategorie: { ...categorieVide },
-  // La liste des catégories affichée sous forme de table
-  listeTrajets: []
-});
-
- */
 const listeTrajets = reactive([]);
 
 function chargeTrajets() {
-
+/*
   axios.get(BACKEND+'/trajets')
       .then(response => {
         console.log(response.data);
-
         listeTrajets.splice(0, listeTrajets.length);
         response.data._embedded.trajets.forEach((trajets) => {
           listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heure, trajets.datefin));
-
         });
-
       })
       .catch(error => {
         console.log(error);
       });
-
-  /*
-  const fetchOptions = { method: "GET",  headers: {
-      "Content-Type": "application/json",
-      'Access-Control-Allow-Origin': 'http://localhost:8989/'
-    },};
-  fetch(BACKEND + "/api/trajets", fetchOptions)
+ */
+  const fetchOptions = { method: "GET" };
+  fetch(BACKEND+'/trajets', fetchOptions)
       .then((response) => {
+        console.log(response)
         return response.json();
       })
       .then((dataJSON) => {
         console.log(dataJSON);
         listeTrajets.splice(0, listeTrajets.length);
-        dataJSON.forEach((t) =>
-            listeTrajets.push(new Trajet(t.numTrajet, t.conducteur, t.pointdepart, t.pointarrivee, t.date, t.heure), t.datefin)
-        );
-      })
+        dataJSON._embedded.trajets.forEach((trajets) => {
+          listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heure, trajets.datefin));
+      })})
       .catch((error) => console.log(error));
 
-
-   */
 }
 
 
 /**
  * Supprime une entité
- * @param entityRef l'URI de l'entité à supprimer
+ * @param numTrajet l'URI de l'entité à supprimer
  */
 function deleteTrajet(numTrajet) {
   alert(numTrajet);
   const fetchOptions = {
     method: "DELETE",
-    mode: "cors"
   };
   fetch(BACKEND + "/trajets/" + numTrajet, fetchOptions)
       .then((response) => {
         return response.json();
+
       })
       .then((dataJSON) => {
         console.log(dataJSON);
         alert("je fonctionne");
-
-        chargeTrajets();
+        chargeTrajets()
       })
       .catch((error) => console.log(error));
 }
 
 // A l'affichage du composant, on affiche la liste
-onMounted(chargeTrajets);
+onMounted(() => {
+  chargeTrajets();
+});
 
 
 
