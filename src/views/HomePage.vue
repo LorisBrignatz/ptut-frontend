@@ -4,33 +4,31 @@ import TrajetListe from "@/components/TrajetListe.vue";
 
 
 <template>
-  <div class="container">
-    <div class="logo">
-      <img src="./assets/img/logoLesCopaings.png" alt="Logo">
-    </div>
-    <h1>Mes trajets</h1>
+  <div>
+    <header>
+      <div class="logo">
+        <img src='/logoLesCopaings.png' alt="Logo">
+      </div>
+      <h1>Mes trajets</h1>
+    </header>
   </div>
   <TrajetListe />
 </template>
 
 <style scoped>
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  text-align: center;
-}
-
 .logo {
-  margin-top: 10px;
+  margin-top: 0px;
+  text-align: center;
+  margin-top: -80px;
 }
-
 .logo img {
-  max-height: 100px;
+  max-height: 150px;
 }
-
 h1 {
-  font-family: "Arial", sans-serif;
+  font-family: 'Blinker', sans-serif;
   font-size: 24px;
-  margin-top: 20px;
+  margin-top: -10px;
+  color: #cab174;
+  text-align: center;
 }
 </style>

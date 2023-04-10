@@ -171,9 +171,6 @@ li {
   color: #181c32;
   cursor: pointer;
 
-/*&:last-child {
-   margin-right: 0;
- }*/
 }
 
 .tab-style {
@@ -182,13 +179,6 @@ li {
   height: 40px;
   flex-direction: column;
   overflow: hidden;
-
-/*span {
-  position: relative;
-  top: 3px;
-  transition: top 0.4s ease-out, font-size 0.2s ease-out;
-  text-shadow: inset 2px 2px 4px var(--clay-box-shadow);
-}*/
 
 &:after {
    width: 100%;

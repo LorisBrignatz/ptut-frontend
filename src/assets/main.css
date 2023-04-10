@@ -34,7 +34,7 @@ a,.green {
 }
 @font-face {
   font-family: 'Blinker';
-  src: url('~@/assets/fonts/Blinker-Regular.ttf') format('truetype');
+  src: url('/Blinker-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

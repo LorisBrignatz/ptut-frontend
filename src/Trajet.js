@@ -7,8 +7,8 @@ export default class Trajet {
         this._date = date;
         this._heure = heure;
         this._datefin = datefin;
-
     }
+
     // Getters
     get numTrajet() {
         return this._numTrajet;
@@ -29,15 +29,14 @@ export default class Trajet {
     get date() {
         return this._date;
     }
-    get datefin() {
-        return this._datefin;
-    }
-
 
     get heure() {
         return this._heure;
     }
 
+    get datefin() {
+        return this._datefin;
+    }
     // Setters
     set numTrajet(value) {
         this._numTrajet = value;
@@ -58,11 +57,10 @@ export default class Trajet {
     set date(value) {
         this._date = value;
     }
-    set datefin(value) {
-        this._datefin = value;
-    }
-
     set heure(value) {
         this._heure = value;
+    }
+    set datefin(value) {
+        this._datefin = value;
     }
 }
