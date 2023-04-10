@@ -147,7 +147,7 @@ li {
 }
 
 ul {
-  background-color: var(--app-content-background-color);
+  background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
   position: fixed;
   bottom: 0;
