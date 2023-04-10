@@ -4,28 +4,17 @@ const emit = defineEmits(["deleteC"]);
 </script>
 
 <template>
+  <h1>Test</h1>
   <div class="trip">
     <div class="trip-details">
       <h2 class="trip-driver">{{ trajet.conducteur }}</h2>
-      <div class="icon-text-container">
-        <i class="material-icons-outlined">location_on</i>
-        <p class="trip-start">Départ: {{ trajet.pointdepart }}</p>
+      <p class="trip-start">Départ: {{ trajet.pointdepart }}</p>
+      <p class="trip-end">Arrivée: {{ trajet.pointarrivee }}</p>
+      <p class="trip-date">Date: {{ trajet.date }}</p>
+      <p class="trip-time">Heure: {{ trajet.heure }}</p>
+      <div class="trip-buttons-delete">
+        <button class="delete-button" @click="$emit('deleteC', trajet.numTrajet)">Annuler</button>
       </div>
-      <div class="icon-text-container">
-        <i class="material-icons-outlined">flag</i>
-        <p class="trip-end">Arrivée: {{ trajet.pointarrivee }}</p>
-      </div>
-      <div class="icon-text-container">
-        <i class="material-icons-outlined">calendar_month</i>
-        <p class="trip-date">Date: {{ trajet.date }}</p>
-      </div>
-      <div class="icon-text-container">
-        <i class="material-icons-outlined">schedule</i>
-        <p class="trip-time">Heure: {{ trajet.heure }}</p>
-      </div>
-    </div>
-    <div class="trip-buttons-delete">
-      <button class="delete-button" @click="$emit('deleteC', trajet.numTrajet)">Annuler ce trajet</button>
     </div>
   </div>
 </template>
@@ -33,51 +22,29 @@ const emit = defineEmits(["deleteC"]);
 <style scoped>
 .trip {
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: 40px;
   box-shadow:0 2px 5px rgba(0, 0, 0, 0.4);
-  margin-top: 20px;
+  margin-bottom: 10px;
   padding: 10px;
   width: 100%;
 }
-.trip-details div {
+.trip-details {
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.trip-details i {
-  margin-right: 10px;
-  font-size: 15px;
-}
-.trip-details p {
-  margin: 0;
-  font-size: 15px;
-}
-.icon-text-container {
-  display: inline-flex;
-  align-items: center;
-}
-.icon-text-container i {
-  margin-right: 10px;
-}
-.icon-text-container p {
-  margin: 0;
+  flex-direction: column;
 }
 .trip-driver {
   color: #4c4c4c;
-  font-size: 15px;
-  font-family: 'Blinker', sans-serif;
+  font-size: 20px;
   margin: 0;
 }
 .trip-start {
-  color: #181c32;
-  font-size: 15px;
-  font-family: 'Blinker', sans-serif;
+  color: #4c4c4c;
+  font-size: 18px;
   margin: 0 10px 0 0;
 }
 .trip-end {
-  color: #181c32;
-  font-size: 15px;
-  font-family: 'Blinker', sans-serif;
+  color: #4c4c4c;
+  font-size: 18px;
   margin: 0 0 0 10px;
 }
 hr {
@@ -86,31 +53,28 @@ hr {
   margin: 10px 0;
 }
 .trip-date {
-  color: #181c32;
-  font-size: 15px;
-  font-family: 'Blinker', sans-serif;
+  color: #4c4c4c;
+  font-size: 18px;
   margin: 0 10px 0 0;
 }
 .trip-time {
-  color: #181c32;
-  font-size: 15px;
-  font-family: 'Blinker', sans-serif;
+  color: #4c4c4c;
+  font-size: 18px;
   margin: 0 0 0 10px;
 }
-.trip-buttons-delete {
-  text-align: center;
-}
+
 .delete-button {
   background-color: #ffffff;
-  border: 1px solid #cab174;
-  border-radius: 20px;
-  color: #cab174;
+  border: 1px solid #fbb040;
+  border-radius: 4px;
+  color: #fbb040;
   cursor: pointer;
-  font-size: 12px;
-  font-family: 'Blinker', sans-serif;
+  font-size: 18px;
+  margin-left: 10px;
+  padding: 10px 20px;
 }
 .delete-button:hover {
-  background-color: #cab174;
+  background-color: #fbb040;
   color: #ffffff;
 }
 </style>

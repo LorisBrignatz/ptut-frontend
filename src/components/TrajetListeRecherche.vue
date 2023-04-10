@@ -15,10 +15,22 @@ let data = reactive({
 
  */
 const listeTrajetsRes = reactive([]);
-
-function chargeTrajetsRecherchePointArrivee() {
-
-  axios.get('http://localhost:8989/api/trajets/search/findByPointNameArriveet?nomP='+ nomPdepart)
+function chargeTrajetsRecherchePointArrivee(nomParrivee) {
+  const fetchOptions = { method: "GET" };
+  fetch('http://localhost:8989/api/trajets/search/findByPointNameArriveet?nomP='+ nomParrivee, fetchOptions)
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        listeTrajets.splice(0, listeTrajets.length);
+        dataJSON._embedded.trajets.forEach((trajets) => {
+          listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heure, trajets.datefin));
+        })})
+      .catch((error) => console.log(error));
+  /*
+  axios.get('http://localhost:8989/api/trajets/search/findByPointNameArriveet?nomP='+ nomParrivee)
       .then(response => {
         console.log(response.data);
 
@@ -32,6 +44,8 @@ function chargeTrajetsRecherchePointArrivee() {
       .catch(error => {
         console.log(error);
       });
+
+   */
 
   /*
   const fetchOptions = { method: "GET",  headers: {
@@ -60,14 +74,9 @@ function chargeTrajetsRecherchePointArrivee() {
  * Supprime une entité
  * @param entityRef l'URI de l'entité à supprimer
  */
-function deleteEntity(entityRef) {
-  doAjaxRequest(entityRef, { method: "DELETE" })
-      .then(chargeCategories)
-      .catch((error) => alert(error.message));
-}
 
 // A l'affichage du composant, on affiche la liste
-onMounted(chargeTrajetsRecherche);
+onMounted(chargeTrajetsRecherchePointArrivee);
 </script>
 
 

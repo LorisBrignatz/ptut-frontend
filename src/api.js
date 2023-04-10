@@ -1,8 +1,4 @@
 
-// L'adresse du backend local
-//const BACKEND = 'http://localhost:8989';
-// Le backend est également déployé sur heroku
-// Attention : le chargement initial peut être un peu long...
 const BACKEND = 'http://localhost:8989/api';
 
 /**
