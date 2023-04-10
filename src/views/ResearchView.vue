@@ -9,9 +9,10 @@ import {BACKEND} from "@/api";
 const listeTrajetsRes = reactive([]);
 
 function chargeTrajetsRecherchePointArrivee(pointarrivee) {
+
   const fetchOptions = {method: "GET", mode:'cors'};
   const url = BACKEND+'/trajets/search/findByPointNameArrivee?nomP='+pointarrivee
-  console.log(url)
+  //console.log(url)
   fetch(url, fetchOptions)
   //fetch('http://localhost:8989/api/trajets/search/findByPointNameArrivee?nomP=isis', fetchOptions)
 
@@ -25,6 +26,8 @@ function chargeTrajetsRecherchePointArrivee(pointarrivee) {
         dataJSON._embedded.trajets.forEach((trajets) => {
           listeTrajetsRes.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heure, trajets.datefin));
         })
+
+
       })
       .catch((error) => console.log(error));
 }
@@ -64,7 +67,9 @@ onMounted(() => {
         :trajet="trajet"
         @deleteC="deleteTrajet"
     />
-
+    <p v-if="listeTrajetsRes.length==0 ">
+    Aucun résultat
+    </p>
   </main>
 </template>
 
