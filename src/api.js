@@ -1,5 +1,6 @@
 
 const BACKEND = 'http://localhost:8989/api';
+const BACKENDS = 'http://localhost:8989'
 
 /**
  * Faire un appel AJAX avec l'API fetch

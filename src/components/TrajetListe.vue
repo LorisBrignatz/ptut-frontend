@@ -43,19 +43,20 @@ function chargeTrajets() {
  * @param numTrajet l'URI de l'entité à supprimer
  */
 function deleteTrajet(numTrajet) {
-  alert(numTrajet);
   const fetchOptions = {
     method: "DELETE",
   };
-  fetch(BACKEND + "/trajets/" + numTrajet, fetchOptions)
+  fetch(BACKEND + "/trajets/"+numTrajet, fetchOptions)
       .then((response) => {
-        return response.json();
+        console.log(response)
+        chargeTrajets()
 
+        return response.json();
       })
       .then((dataJSON) => {
         console.log(dataJSON);
-        alert("je fonctionne");
-        chargeTrajets()
+        chargeTrajets();
+
       })
       .catch((error) => console.log(error));
 }

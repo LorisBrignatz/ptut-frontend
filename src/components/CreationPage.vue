@@ -45,7 +45,7 @@ export default {
       <div v-if="recurrent" class="form-group">
         <input type="text" v-model="frequence" placeholder="Fréquence" />
       </div>('addT', pointdepart, pointpassage, pointarrivee, date, heure,-->
-      <button class="add-button" @click="$emit('addT',nom, prenom, pointdepart, pointarrivee, date, heure)">Créer</button>
+      <button class="add-button"><!-- @click="$emit('addT',nom, prenom, pointdepart, pointarrivee, date, heure)">-->Créer</button>
     </form>
   </div>
 </template>
