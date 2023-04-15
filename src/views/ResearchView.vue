@@ -74,5 +74,9 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
+p {
+  font-family: 'Blinker', sans-serif;
+  margin-top: 10px;
+  text-align: center;
+}
 </style>

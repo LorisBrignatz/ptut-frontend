@@ -1,10 +1,4 @@
 <script>
-import { ref } from "vue";
-const libelle = ref("");
-/*const emit = defineEmits(["addT"]);*/
-export default {
-  name: "CreationPage"
-}
 </script>
 
 <template>
