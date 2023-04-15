@@ -85,6 +85,7 @@ onMounted(() => {
       </div>
     </div>
     <div class="trip-buttons-delete">
+      <button class="reserve-button" @click="$emit(trajet.numTrajet)">Réserver ce trajet</button>
       <button class="delete-button" @click="$emit('deleteC', trajet.numTrajet)">Annuler ce trajet</button>
     </div>
   </div>
@@ -100,6 +101,7 @@ onMounted(() => {
   padding: 10px;
   width: 100%;
 }
+
 .trip-details div {
   display: flex;
   align-items: center;
@@ -127,7 +129,7 @@ onMounted(() => {
   color: #4c4c4c;
   font-size: 15px;
   font-family: 'Blinker', sans-serif;
-  margin: 0;
+  text-align: right;
 }
 .trip-start {
   color: #181c32;
@@ -170,65 +172,18 @@ hr {
   font-size: 12px;
   font-family: 'Blinker', sans-serif;
 }
+.reserve-button {
+  background-color: #ffffff;
+  border: 1px solid #cab174;
+  border-radius: 20px;
+  color: #cab174;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Blinker', sans-serif;
+  margin-right: 10px;
+}
 .delete-button:hover {
   background-color: #cab174;
   color: #ffffff;
 }
-/*.trip {
-  background-color: #ffffff;
-  border-radius: 40px;
-  box-shadow:0 2px 5px rgba(0, 0, 0, 0.4);
-  margin-bottom: 10px;
-  padding: 10px;
-  width: 100%;
-}
-.trip-details {
-  display: flex;
-  flex-direction: column;
-}
-.trip-driver {
-  color: #4c4c4c;
-  font-size: 20px;
-  margin: 0;
-}
-.trip-start {
-  color: #4c4c4c;
-  font-size: 18px;
-  margin: 0 10px 0 0;
-}
-.trip-end {
-  color: #4c4c4c;
-  font-size: 18px;
-  margin: 0 0 0 10px;
-}
-hr {
-  border: 0;
-  border-top: 1px solid #eee;
-  margin: 10px 0;
-}
-.trip-date {
-  color: #4c4c4c;
-  font-size: 18px;
-  margin: 0 10px 0 0;
-}
-.trip-time {
-  color: #4c4c4c;
-  font-size: 18px;
-  margin: 0 0 0 10px;
-}
-
-.delete-button {
-  background-color: #ffffff;
-  border: 1px solid #fbb040;
-  border-radius: 4px;
-  color: #fbb040;
-  cursor: pointer;
-  font-size: 18px;
-  margin-left: 10px;
-  padding: 10px 20px;
-}
-.delete-button:hover {
-  background-color: #fbb040;
-  color: #ffffff;
-}*/
 </style>
