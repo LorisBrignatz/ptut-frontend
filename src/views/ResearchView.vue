@@ -24,7 +24,7 @@ function chargeTrajetsRecherchePointArrivee(pointarrivee) {
         console.log(dataJSON);
         listeTrajetsRes.splice(0, listeTrajetsRes.length);
         dataJSON._embedded.trajets.forEach((trajets) => {
-          listeTrajetsRes.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heure, trajets.datefin));
+          listeTrajetsRes.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heuredepart, trajets.datefin));
         })
 
 
@@ -32,19 +32,20 @@ function chargeTrajetsRecherchePointArrivee(pointarrivee) {
       .catch((error) => console.log(error));
 }
 function deleteTrajet(numTrajet) {
-  alert(numTrajet);
   const fetchOptions = {
     method: "DELETE",
   };
-  fetch(BACKEND + "/trajets/" + numTrajet, fetchOptions)
+  fetch(BACKEND + "/trajets/"+numTrajet, fetchOptions)
       .then((response) => {
-        return response.json();
+        console.log(response)
+        chargeTrajetsRecherchePointArrivee()
 
+        return response.json();
       })
       .then((dataJSON) => {
         console.log(dataJSON);
-        alert("je fonctionne");
-        chargeTrajets()
+        chargeTrajetsRecherchePointArrivee();
+
       })
       .catch((error) => console.log(error));
 }
