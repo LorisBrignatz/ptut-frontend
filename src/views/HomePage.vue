@@ -9,7 +9,7 @@ import TrajetListe from "@/components/TrajetListe.vue";
       <div class="logo">
         <img src='/logoLesCopaings.png' alt="Logo">
       </div>
-      <h1>Mes trajets</h1>
+      <h1>Les trajets</h1>
     </header>
   </div>
   <TrajetListe />
