@@ -168,7 +168,7 @@ onMounted(() => {
 
   <div v-if="showPopup" class="popup">
     <div class="popup-content">
-      <h2>Les Passagers de ce trajet</h2>
+      <h2>Passager(s) de ce trajet</h2>
       <form @submit.prevent="ajoutPassager">
         <label>
           Nom :
@@ -180,10 +180,12 @@ onMounted(() => {
           <input type="text" v-model="prenomP" />
         </label>
         <br />
-        <button type="submit" class="reserve-button">Enregistrer</button>
-        <button type="button" @click="showPopup = false" class="reserve-button">Fermer</button>
+        <div class="input-button">
+          <button type="submit" class="reserve-button">Enregistrer</button>
+          <button type="button" @click="showPopup = false" class="reserve-button">Fermer</button>
+        </div>
       </form>
-      Réservation des passagers :
+      <h3>Déjà enregistré(s) :</h3>
         <p v-for="person in people">
           {{ person.firstName }} {{ person.lastName }}
         </p>
@@ -307,6 +309,31 @@ hr {
 .popup-content {
   background-color: white;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 20px;
+}
+
+.input-button {
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Blinker', sans-serif;
+  color: #cab174;
+  font-size: 24px;
+}
+
+label {
+  font-family: 'Blinker', sans-serif;
+  color: #181c32;
+}
+
+p {
+  font-family: 'Blinker', sans-serif;
+  color: #181c32;
+}
+
+h3 {
+  font-family: 'Blinker', sans-serif;
+  color: #181c32;
 }
 </style>
