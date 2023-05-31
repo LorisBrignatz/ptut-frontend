@@ -6,8 +6,6 @@ import Trajet from "../Trajet.js";
 import TrajetItem from "@/components/TrajetItem.vue"
 
 const listeTrajets = reactive([]);
-
-function chargeTrajets() {
 /*
   axios.get(BACKEND+'/trajets')
       .then(response => {
@@ -21,6 +19,8 @@ function chargeTrajets() {
         console.log(error);
       });
  */
+function chargeTrajets() {
+
   const fetchOptions = { method: "GET" };
   fetch(BACKEND+'/trajets', fetchOptions)
       .then((response) => {

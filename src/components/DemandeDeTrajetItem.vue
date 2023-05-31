@@ -1,13 +1,13 @@
 <script setup>
-import Trajet from "@/Trajet";
+import DemandeDeTrajet from "@/DemandeDeTrajet";
 import {onMounted, ref, defineProps, reactive} from "vue";
 import {BACKEND} from "@/api";
 import PassagersComponents from "@/components/PassagersComponents.vue";
 
 const props = defineProps({
-  trajet: Trajet
+  demandeDeTrajet: DemandeDeTrajet
 });
-const emit = defineEmits(["deleteC"]);
+const emit = defineEmits(["deleteC", "checkC"]);
 
 const name = ref('');
 const pointdepartName = ref('');
@@ -21,8 +21,7 @@ const people = reactive([])
 
 function getName(){
   const fetchOptions = {method: "GET", mode:'cors'};
-  const url = BACKEND+'/utilisateurs/search/findByUserid?userid='+ props.trajet._conducteur
-  //console.log(props.trajet._conducteur);
+  const url = BACKEND+'/utilisateurs/search/findByUserid?userid='+ props.demandeDeTrajet.demandeur
   //console.log(url)
   fetch(url, fetchOptions)
       .then((response) => {
@@ -37,7 +36,7 @@ function getName(){
 }
 function getPointDepart(){
   const fetchOptions = {method: "GET", mode:'cors'};
-  const url = BACKEND+'/points/search/findByIdpoint?idpoint='+ props.trajet.pointdepart
+  const url = BACKEND+'/points/search/findByIdpoint?idpoint='+ props.demandeDeTrajet.pointdepart
   //console.log(url)
   fetch(url, fetchOptions)
       .then((response) => {
@@ -52,7 +51,7 @@ function getPointDepart(){
 }
 function getPointArrivee(){
   const fetchOptions = {method: "GET", mode:'cors'};
-  const url = BACKEND+'/points/search/findByIdpoint?idpoint='+ props.trajet.pointarrivee
+  const url = BACKEND+'/points/search/findByIdpoint?idpoint='+ props.demandeDeTrajet.pointarrivee
   //console.log(url)
   fetch(url, fetchOptions)
       .then((response) => {
@@ -65,83 +64,23 @@ function getPointArrivee(){
       })
       .catch((error) => console.log(error));
 }
-function getPassagers(){
-  const fetchOptions = {method: "GET", mode:'cors'};
-  const url = BACKEND+'/passagerses/search/findByNumtrajet?numtrajet='+ props.trajet.numTrajet
-  console.log(url)
-
-  fetch(url, fetchOptions)
-      .then((response) => {
-        console.log(response)
-        return response.json();
-      })
-      .then((dataJSON) => {
-        console.log(dataJSON);
-        dataJSON._embedded.passagerses.forEach((passager) =>{
-          //console.log(passager.userid)
-          userIDs.splice(0, userIDs.length);
-          userIDs.push(passager.userid);
-          console.log("La liste  " +userIDs)
-          people.splice(0, people.length);
-          for (const userId of userIDs) {
-            fetch(BACKEND+'/utilisateurs/search/findByUserid?userid=' + userId, {method: "GET"})
-                .then((response) => {
-                  //console.log(response)
-                  return response.json();
-                })
-                .then((dataJSON) => {
-                  //console.log(dataJSON);
-                  console.log(dataJSON.nom)
-
-                  people.push({
-                    firstName: dataJSON.prenom,
-                    lastName: dataJSON.nom
-                  });
-                })
-                .catch((error) => console.log(error));
-          }
-        });
-      })
-      .catch((error) => console.log(error));
-
-}
+const nom="Bornard"
+const prenom="Matisse"
 
 
-function ajoutPassager (nom, prenom, ){
-  fetch('/services/passagers/ajouter?nom=' + nomP.value + '&prenom=' + prenomP.value + '&numTrajet=' + props.trajet.numTrajet, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-
-    },
-  })
-      .then(response => {
-        console.log(response)
-        return response.json()})
-      .then(data => {
-        console.log('passager ok', data);
-        showPopup.value = false;
-        getPassagers()
-      })
-      .catch(error => {
-        console.error('Une erreur est survenue:', error);
-      });
-
-  showPopup.value = false;
-
-}
 onMounted(() => {
   getName();
   getPointArrivee();
   getPointDepart();
-  getPassagers();
 });
 </script>
 
 <template>
   <div class="trip">
     <div class="trip-details">
-      <h2 class="trip-driver">{{ name }}</h2>
+        <h2 class="trip-driver"><span class="material-icons-outlined">add_comment</span>
+          {{ name }}</h2>
+
       <div class="icon-text-container">
         <i class="material-icons-outlined">location_on</i>
         <p class="trip-start">Départ: {{ pointdepartName }}</p>
@@ -152,47 +91,21 @@ onMounted(() => {
       </div>
       <div class="icon-text-container">
         <i class="material-icons-outlined">calendar_month</i>
-        <p class="trip-date">Date: {{ trajet.date }}</p>
+        <p class="trip-date">Date: {{ demandeDeTrajet.date }}</p>
       </div>
       <div class="icon-text-container">
         <i class="material-icons-outlined">schedule</i>
-        <p class="trip-time">Heure: {{ trajet.heure }}</p>
+        <p class="trip-time">Heure: {{ demandeDeTrajet.heure }}</p>
       </div>
     </div>
     <div class="trip-buttons-delete"> <!--$emit(trajet.numTrajet)-->
-      <button class="reserve-button" @click="showPopup = true">Réserver ce trajet</button>
-      <button class="delete-button" @click="$emit('deleteC', trajet.numTrajet)">Annuler ce trajet</button>
+      <button class="check-button" @click="$emit('checkC',nom, prenom, demandeDeTrajet.numTrajet)">Valider cette damande</button>
+      <button class="delete-button" @click="$emit('deleteC',  demandeDeTrajet.numTrajet)">Annuler ce trajet</button>
     </div>
   </div>
   <!--<PassagersComponents v-if="afficherPassagers" :numTrajet="trajet.numTrajet"></PassagersComponents>-->
 
 
-  <div v-if="showPopup" class="popup">
-    <div class="popup-content">
-      <h2>Passager(s) de ce trajet</h2>
-      <form @submit.prevent="ajoutPassager">
-        <label>
-          Nom :
-          <input type="text" v-model="nomP" />
-        </label>
-        <br />
-        <label>
-          Prénom :
-          <input type="text" v-model="prenomP" />
-        </label>
-        <br />
-        <div class="input-button">
-          <button type="submit" class="reserve-button">Enregistrer</button>
-          <button type="button" @click="showPopup = false" class="reserve-button">Fermer</button>
-        </div>
-      </form>
-      <h3>Déjà enregistré(s) :</h3>
-        <p v-for="person in people">
-          {{ person.firstName }} {{ person.lastName }}
-        </p>
-
-    </div>
-  </div>
 
 </template>
 
@@ -267,7 +180,7 @@ hr {
 }
 .trip-buttons-delete {
   text-align: center;
-}
+  }
 .delete-button {
   background-color: #ffffff;
   border: 1px solid #cab174;
@@ -277,7 +190,7 @@ hr {
   font-size: 12px;
   font-family: 'Blinker', sans-serif;
 }
-.reserve-button {
+.check-button {
   background-color: #ffffff;
   border: 1px solid #cab174;
   border-radius: 20px;
@@ -291,7 +204,7 @@ hr {
   background-color: #cab174;
   color: #ffffff;
 }
-.reserve-button:hover {
+.check-button:hover {
   background-color: #cab174;
   color: #ffffff;
 }

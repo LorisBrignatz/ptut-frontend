@@ -30,6 +30,10 @@ export default defineConfig({
         target: 'http://localhost:8989', // correspond à la config du backend server.port dans application.properties
         changeOrigin: true,
       },
+      '/services/demandeDeTrajets': { // L'adresse des contrôleurs ad-hoc pour les services métier
+        target: 'http://localhost:8989', // correspond à la config du backend server.port dans application.properties
+        changeOrigin: true,
+      },
     },
   },
 })
