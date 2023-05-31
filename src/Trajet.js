@@ -15,7 +15,7 @@ export default class Trajet {
     }
 
     get conducteur() {
-        return this._demandeur;
+        return this._conducteur;
     }
 
     get pointdepart() {
