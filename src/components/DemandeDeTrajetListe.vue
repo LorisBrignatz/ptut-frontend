@@ -8,6 +8,16 @@ import RequestCreationPage from "@/components/RequestCreationPage.vue"
 const listeDemandeDeTrajets = reactive([]);
 const ajoutReussi = ref(false)
 const erreurCreation = ref(false)
+
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
+const store = useStore();
+const router = useRouter();
+
+const { user } = store.state.auth;
+const currentUser = user;
+
 function chargeDemandeDeTrajets() {
 
   const fetchOptions = { method: "GET" };
@@ -46,9 +56,9 @@ function deleteTrajet(numTrajet) {
       .catch((error) => console.log(error));
 }
 
-function checkDemande(nom, prenom , numTrajet){
-  console.log(nom, prenom, numTrajet)
-  const url = '/services/demandeDeTrajets/valider?nom=' + "Bornard" + '&prenom=' + "Matisse" +"&numTrajet="+ numTrajet
+function checkDemande(numTrajet){
+  console.log(numTrajet)
+  const url = '/services/demandeDeTrajets/valider?nom=' + currentUser.nom + '&prenom=' + currentUser.prenom +"&numTrajet="+ numTrajet
   console.log(url)
   fetch(url, {
         method: 'POST',

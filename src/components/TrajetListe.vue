@@ -195,6 +195,7 @@ onMounted(() => {
       :key="trajet.numTrajet"
       :trajet="trajet"
       @deleteC="deleteTrajet"
+      @resaSuppr="chargeTrajets"
   />
 
 </template>

@@ -3,6 +3,14 @@ import DemandeDeTrajet from "@/DemandeDeTrajet";
 import {onMounted, ref, defineProps, reactive} from "vue";
 import {BACKEND} from "@/api";
 import PassagersComponents from "@/components/PassagersComponents.vue";
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
+const store = useStore();
+const router = useRouter();
+
+const { user } = store.state.auth;
+const currentUser = user;
 
 const props = defineProps({
   demandeDeTrajet: DemandeDeTrajet
@@ -64,8 +72,6 @@ function getPointArrivee(){
       })
       .catch((error) => console.log(error));
 }
-const nom="Bornard"
-const prenom="Matisse"
 
 
 onMounted(() => {
@@ -99,8 +105,8 @@ onMounted(() => {
       </div>
     </div>
     <div class="trip-buttons-delete"> <!--$emit(trajet.numTrajet)-->
-      <button class="check-button" @click="$emit('checkC',nom, prenom, demandeDeTrajet.numTrajet)">Valider cette damande</button>
-      <button class="delete-button" @click="$emit('deleteC',  demandeDeTrajet.numTrajet)">Annuler ce trajet</button>
+      <button class="check-button" v-if="currentUser.userid != demandeDeTrajet.demandeur" @click="$emit('checkC', demandeDeTrajet.numTrajet)">Valider cette damande</button>
+      <button class="delete-button" v-if="currentUser.userid == demandeDeTrajet.demandeur" @click="$emit('deleteC',  demandeDeTrajet.numTrajet)">Annuler ma demande</button>
     </div>
   </div>
   <!--<PassagersComponents v-if="afficherPassagers" :numTrajet="trajet.numTrajet"></PassagersComponents>-->

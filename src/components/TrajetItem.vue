@@ -4,10 +4,20 @@ import {onMounted, ref, defineProps, reactive} from "vue";
 import {BACKEND} from "@/api";
 import PassagersComponents from "@/components/PassagersComponents.vue";
 
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
+const store = useStore();
+const router = useRouter();
+
+const { user } = store.state.auth;
+const currentUser = user;
+
+
 const props = defineProps({
   trajet: Trajet
 });
-const emit = defineEmits(["deleteC"]);
+const emit = defineEmits(["deleteC", "resaSuppr"]);
 
 const name = ref('');
 const pointdepartName = ref('');
@@ -18,6 +28,7 @@ const nomP = ref('');
 const prenomP = ref('');
 const userIDs = reactive([])
 const people = reactive([])
+
 
 function getName(){
   const fetchOptions = {method: "GET", mode:'cors'};
@@ -105,10 +116,42 @@ function getPassagers(){
       .catch((error) => console.log(error));
 
 }
+function supprPassager() {
+  const url = BACKEND + '/passagerses/search/findByNumtrajetAndUserid?numtrajet=' + props.trajet.numTrajet + '&userid=' + currentUser.userid
+  //console.log(url)
+  fetch(url, {method: "GET", mode: 'cors'})
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then((dataJSON) => {
+
+        console.log(dataJSON);
+        fetch(BACKEND + "/passagerses/" + dataJSON.id
+            , {method: "DELETE", mode: 'cors'})
+            .then((response) => {
+              console.log(response)
+              setTimeout(() => {
+                getPassagers();
+                window.location.reload();
+              }, 500);
+              return response.json();
+
+            })
+            .then((dataJSON) => {
+              console.log(dataJSON);
+            })
+            .catch((error) => console.log(error));
 
 
-function ajoutPassager (nom, prenom, ){
-  fetch('/services/passagers/ajouter?nom=' + nomP.value + '&prenom=' + prenomP.value + '&numTrajet=' + props.trajet.numTrajet, {
+      })
+      .catch((error) => console.log(error));
+}
+
+
+
+function ajoutPassager (){
+  fetch('/services/passagers/ajouter?userid='+ currentUser.userid+'&numTrajet=' + props.trajet.numTrajet, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -160,8 +203,11 @@ onMounted(() => {
       </div>
     </div>
     <div class="trip-buttons-delete"> <!--$emit(trajet.numTrajet)-->
-      <button class="reserve-button" @click="showPopup = true">Réserver ce trajet</button>
-      <button class="delete-button" @click="$emit('deleteC', trajet.numTrajet)">Annuler ce trajet</button>
+      <button class="reserve-button" @click="showPopup = true" v-if="currentUser.userid == trajet.conducteur">Voir les passagers</button>
+      <button class="reserve-button" v-if="!userIDs.includes(currentUser.userid) && currentUser.userid != trajet.conducteur" @click="ajoutPassager">Réserver ce trajet</button>
+      <button class="reserve-button" v-if="userIDs.includes(currentUser.userid) && currentUser.userid != trajet.conducteur" @click="supprPassager" >Annuler ma réservation</button>
+
+      <button class="delete-button" @click="$emit('deleteC', trajet.numTrajet)" v-if="currentUser.userid == trajet.conducteur">Annuler ce trajet</button>
     </div>
   </div>
   <!--<PassagersComponents v-if="afficherPassagers" :numTrajet="trajet.numTrajet"></PassagersComponents>-->
@@ -170,26 +216,14 @@ onMounted(() => {
   <div v-if="showPopup" class="popup">
     <div class="popup-content">
       <h2>Passager(s) de ce trajet</h2>
-      <form @submit.prevent="ajoutPassager">
-        <label>
-          Nom :
-          <input type="text" v-model="nomP" />
-        </label>
-        <br />
-        <label>
-          Prénom :
-          <input type="text" v-model="prenomP" />
-        </label>
-        <br />
-        <div class="input-button">
-          <button type="submit" class="reserve-button">Enregistrer</button>
-          <button type="button" @click="showPopup = false" class="reserve-button">Fermer</button>
-        </div>
-      </form>
+
       <h3>Déjà enregistré(s) :</h3>
         <p v-for="person in people">
           {{ person.firstName }} {{ person.lastName }}
         </p>
+      <div class="input-button">
+        <button type="button" @click="showPopup = false" class="reserve-button">Fermer</button>
+      </div>
 
     </div>
   </div>
@@ -305,6 +339,7 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 .popup-content {

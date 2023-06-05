@@ -1,4 +1,7 @@
-<template>
+<!--<template>
+  <a class="nav-link" @click.prevent="logOut">
+    <font-awesome-icon icon="sign-out-alt" /> LogOut
+  </a>
   <div class="container">
     <div class="img_profile">
       <img src="/camille.png" alt="profile">
@@ -52,14 +55,132 @@
     </div>
   </div>
 </template>
+-->
 
-<script>
-export default {
-  name: "ProfilePage"
+<template>
+  <div class="iconLogOut">
+    <a @click.prevent="logOut">
+      <i class="material-icons-outlined">exit_to_app</i>
+      Se déconnecter
+    </a>
+  </div>
+  <div class="create-container">
+    <header>
+      <h2>
+        Profile <strong>{{currentUser.username}}</strong>
+      </h2>
+    </header>
+    <p>
+      <strong>Id:</strong>
+      {{currentUser.userid}}
+    </p>
+    <p>
+      <strong>Nom:</strong>
+      {{currentUser.nom}}
+    </p>
+    <p>
+      <strong>Prenom:</strong>
+      {{currentUser.prenom}}
+    </p>
+    <p>
+      <strong>Email:</strong>
+      {{currentUser.email}}
+    </p>
+    <p>
+      <strong>Token:</strong>
+      {{currentUser.accessToken.substring(0, 20)}} ... {{currentUser.accessToken.substr(currentUser.accessToken.length - 20)}}
+    </p>
+
+    <!--
+    <strong>Authorities:</strong>
+    <ul>
+      <li v-for="role in currentUser.roles" :key="role">{{role}}</li>
+    </ul>
+    -->
+  </div>
+  <div class="blocProfil">
+    <h2> Mes réservations : </h2>
+    <TrajetListeReservation />
+  </div>
+  <div class="blocProfil">
+    <h2> Mes trajets proposés : </h2>
+    <TrajetListeMesPropositions />
+  </div>
+
+
+</template>
+
+
+<script setup>
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import TrajetListeReservation from "@/components/TrajetListeReservation.vue";
+import TrajetListeMesPropositions from "@/components/TrajetListeMesPropositions.vue";
+
+const store = useStore();
+const router = useRouter();
+
+const logOut = () => {
+  store.dispatch('auth/logout');
+  router.push('/login');
+};
+
+const { user } = store.state.auth;
+const currentUser = user;
+
+if (!currentUser) {
+  router.push('/login');
 }
 </script>
 
 <style scoped>
+
+.create-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow:0 2px 5px rgba(0, 0, 0, 0.4);
+  width: 100%;
+}
+p{
+
+  font-family: 'Blinker', sans-serif;
+  color: #4c4c4c;
+  margin-top: 10px;
+
+}
+h2 {
+  font-family: 'Blinker', sans-serif;
+  color: #cab174;
+}
+
+
+.iconLogOut a{
+  position: fixed;
+  z-index: 2;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  color: #cab174;
+  font-family: 'Blinker', sans-serif;
+  font-size: 20px;
+  padding:  5px;
+  border: solid;
+  border-color: #cab174;
+  border-width: 1px;
+  border-radius: 20px;
+  background-color: white;
+}
+.blocProfil{
+  margin-top: 20px;
+
+}
+
+
 .item:not(:last-child) {
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
