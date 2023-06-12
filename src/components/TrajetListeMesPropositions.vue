@@ -85,7 +85,7 @@ onMounted(() => {
       :trajet="trajet"
       @deleteC="deleteTrajet"
   />
-  <p class="oups" v-if="listeTrajets.length==0"><i class="material-icons-outlined" style="color: rgb(204, 181, 120)">sentiment_dissatisfied</i><br>  Oups, c'est un peu vide ici.. <br> Vous pouvez proposer des trajets <a href="/creation"> ici </a> </p>
+  <p class="oups" v-if="listeTrajets.length==0"><i class="material-icons-outlined" style="color: rgb(204, 181, 120)">sentiment_dissatisfied</i><br>  Oups, c'est un peu vide ici.. <br> Vous pouvez proposer des trajets <RouterLink to="/creation"> ici </RouterLink> </p>
 
 </template>
 

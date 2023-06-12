@@ -47,7 +47,7 @@
         {{ message }}
 
       </div>
-      <a href="/login">Se connecter</a>
+      <RouterLink to="/login">Se connecter</RouterLink>
     </div>
   </div>
 </template>

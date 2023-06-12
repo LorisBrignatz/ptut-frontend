@@ -8,7 +8,8 @@
       :class="successful ? 'alert-success' : 'alert-danger'"
   >
     {{ message }} <br>
-    <a v-if= "successful" href="/login"> Se connecter</a>
+    <RouterLink to="/request" v-if= "successful">Se connecter</RouterLink>
+    <!--<a v-if= "successful" href="/login"> Se connecter</a>-->
   </div>
 
 </template>
