@@ -44,7 +44,7 @@
         </div>
       </form>
       <p>Pas encore membre ?</p>
-      <a href="/register"> Inscription</a>
+      <RouterLink to="/register"> Inscription </RouterLink>
     </div>
   </div>
 </template>
