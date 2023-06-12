@@ -1,5 +1,5 @@
 
-const BACKEND = 'http://localhost:8989/api';
+const BACKEND = 'https://lescopaings.azurewebsites.net/api';
 const BACKENDS = 'http://localhost:8989'
 
 /**
