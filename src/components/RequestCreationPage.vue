@@ -6,7 +6,6 @@ const pointsDepartListe = reactive([]);
 const pointsArriveeListe = reactive([]);
 const pointdepart = ref('');
 const pointarrivee = ref('');
-
 function chargePointsContaining(){
   const fetchOptions = {method: "GET", mode:'cors'};
   const url = '/api/points/search/findByNomContaining?substring=' + pointdepart.value;
@@ -45,7 +44,6 @@ function chargePointsContainingArrivee(){
       .catch((error) => console.log(error));
 
 }
-
 function chargePoints(){
   const fetchOptions = {method: "GET", mode:'cors'};
   const url = BACKEND+'/points?page=0&size=1000';
@@ -76,9 +74,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <h2>Créez un trajet</h2>
+
   <div class="create-container">
-    <form class="form-add" @submit.prevent="$emit('addT', this.$refs.pointdepartSelect.value, this.$refs.pointarriveeSelect.value, date, heure)">
+    <form class="form-add" @submit.prevent="$emit('AddRequest', this.$refs.pointdepartSelect.value, this.$refs.pointarriveeSelect.value, date, heure)">
       <div class="form-group">
         <div>
           <input type="text" v-model="pointdepart" @input="chargePointsContaining" placeholder="Point de départ" />
@@ -88,7 +86,6 @@ onMounted(() => {
           <option v-for="point in pointsDepartListe" :value="point">{{ point }}</option>
         </select>
       </div>
-
       <div class="form-group">
         <div>
           <input type="text" v-model="pointarrivee" @input="chargePointsContainingArrivee" placeholder="Point d'arrivée" />
@@ -98,7 +95,6 @@ onMounted(() => {
           <option v-for="point in pointsArriveeListe" :value="point">{{ point }}</option>
         </select>
       </div>
-
       <div class="form-group">
         <input type="date" v-model="date" placeholder="Date de départ" />
         <i class="material-icons-outlined">event</i>
@@ -108,13 +104,14 @@ onMounted(() => {
         <i class="material-icons-outlined">access_time</i>
       </div>
       <div class="input-button-create">
-        <button class="add-button">Créer un trajet</button>
+        <button class="add-button">Poster ma demande</button>
       </div>
     </form>
   </div>
 </template>
 
 <style scoped>
+
 h2 {
   font-family: 'Blinker', sans-serif;
   color: #cab174;
@@ -194,6 +191,7 @@ input[type="time"]::-webkit-inner-spin-button {
   display: none;
 }
 
+
 select {
   width: 100%;
   border: none;
@@ -234,5 +232,4 @@ select option:checked {
   background-color: #cab174;
   color: #fff;
 }
-
 </style>

@@ -1,6 +1,5 @@
 <script setup>
-import DemandeDeTrajetListe from "@/components/DemandeDeTrajetListe.vue";
-
+import TrajetListe from "@/components/TrajetListe.vue";
 </script>
 
 
@@ -10,19 +9,13 @@ import DemandeDeTrajetListe from "@/components/DemandeDeTrajetListe.vue";
       <div class="logo">
         <img src='/logoLesCopaings.png' alt="Logo">
       </div>
-      <h1>Les demandes de trajets</h1>
+      <h1>Les trajets</h1>
     </header>
   </div>
-  <h3> Créer une demande de trajet</h3>
-  <DemandeDeTrajetListe />
+  <TrajetListe />
 </template>
 
 <style scoped>
-h3 {
-  font-family: 'Blinker', sans-serif;
-  color: #cab174;
-  margin-top: 15px;
-}
 .logo {
   margin-top: 0px;
   text-align: center;

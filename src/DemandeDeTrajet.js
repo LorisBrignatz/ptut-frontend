@@ -1,12 +1,11 @@
-export default class Trajet {
-    constructor(numTrajet, conducteur, pointdepart, pointarrivee, date, heure, datefin) {
+export default class DemandeDeTrajet {
+    constructor(numTrajet, demandeur, pointdepart, pointarrivee, date, heure) {
         this._numTrajet = numTrajet;
-        this._conducteur = conducteur;
+        this._demandeur = demandeur;
         this._pointdepart = pointdepart;
         this._pointarrivee = pointarrivee;
         this._date = date;
         this._heure = heure;
-        this._datefin = datefin;
     }
 
     // Getters
@@ -14,8 +13,8 @@ export default class Trajet {
         return this._numTrajet;
     }
 
-    get conducteur() {
-        return this._conducteur;
+    get demandeur() {
+        return this._demandeur;
     }
 
     get pointdepart() {
@@ -42,7 +41,7 @@ export default class Trajet {
         this._numTrajet = value;
     }
 
-    set conducteur(value) {
+    set demandeur(value) {
         this._demandeur = value;
     }
 

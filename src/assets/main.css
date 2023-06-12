@@ -8,10 +8,9 @@
   font-weight: normal;
 }
 
-a,
-.green {
+a,.green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: hsl(116, 45%, 62%);
   transition: 0.4s;
 }
 
@@ -33,10 +32,9 @@ a,
     padding: 0 2rem;
   }
 }
-
 @font-face {
   font-family: 'Blinker';
-  src: url('~@/assets/fonts/Blinker-Regular.ttf') format('truetype');
+  src: url('/Blinker-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

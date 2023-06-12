@@ -1,5 +1,80 @@
 <script setup>
-/*import { reactive, onMounted } from "vue";
+import { reactive, onMounted } from "vue";
+import { BACKEND, doAjaxRequest } from "../api";
+import axios from "axios";
+import Trajet from "../Trajet.js";
+import TrajetItem from "@/components/TrajetItem.vue"
+
+const listeTrajets = reactive([]);
+/*
+  axios.get(BACKEND+'/trajets')
+      .then(response => {
+        console.log(response.data);
+        listeTrajets.splice(0, listeTrajets.length);
+        response.data._embedded.trajets.forEach((trajets) => {
+          listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heure, trajets.datefin));
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+ */
+function chargeTrajets() {
+  const currentDate = new Date(); // Obtient la date actuelle
+  const fetchOptions = { method: "GET" };
+  fetch(BACKEND+'/trajets', fetchOptions)
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        listeTrajets.splice(0, listeTrajets.length);
+        dataJSON._embedded.trajets.forEach((trajets) => {
+          if(new Date(trajets.datedepart) > currentDate) {
+            listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heuredepart, trajets.datefin));
+          }else {
+            deleteTrajet(trajets.numtrajet);
+          }
+      })})
+      .catch((error) => console.log(error));
+
+}
+
+
+/**
+ * Supprime une entité
+ * @param numTrajet l'URI de l'entité à supprimer
+ */
+function deleteTrajet(numTrajet) {
+  const fetchOptions = {
+    method: "POST",
+    mode: "cors",
+  };
+  fetch('/services/trajets/annuler?numtrajet='+numTrajet, fetchOptions)
+      .then((response) => {
+        console.log(response)
+        chargeTrajets()
+
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        chargeTrajets();
+
+      })
+      .catch((error) => console.log(error));
+}
+
+// A l'affichage du composant, on affiche la liste
+onMounted(() => {
+  chargeTrajets();
+});
+
+
+
+
+/*
 import CreationPage from "./CreationPage.vue";
 import Trajet from "../Trajet";
 import ResearchPage from "@/components/ResearchPage.vue";
@@ -120,6 +195,13 @@ onMounted(() => {
 
 
 <template>
+  <TrajetItem
+      v-for="trajet of listeTrajets"
+      :key="trajet.numTrajet"
+      :trajet="trajet"
+      @deleteC="deleteTrajet"
+      @resaSuppr="chargeTrajets"
+  />
 
 </template>
 
