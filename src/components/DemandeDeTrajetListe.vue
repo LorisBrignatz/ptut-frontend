@@ -85,9 +85,9 @@ function checkDemande(numTrajet){
 
 
 }
-function posterDemande(nom, prenom, pointdepart, pointarrivee, date, heure) { //titre, prix, qtestock
-  console.log(nom, prenom, pointdepart, pointarrivee, date, heure);
-  fetch('/services/demandeDeTrajets/ajouter?nom=' + nom + '&prenom=' + prenom
+function posterDemande(pointdepart, pointarrivee, date, heure) { //titre, prix, qtestock
+  console.log(pointdepart, pointarrivee, date, heure);
+  fetch('/services/demandeDeTrajets/ajouter?userid=' + currentUser.userid
       + "&nompointdepart=" + pointdepart + "&nompointarrivee=" + pointarrivee + "&date=" + date + "&heure=" + heure
       //fetch('/services/trajets/ajouter'
       , {

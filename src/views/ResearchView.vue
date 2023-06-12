@@ -33,9 +33,10 @@ function chargeTrajetsRecherchePointArrivee(pointarrivee) {
 }
 function deleteTrajet(numTrajet) {
   const fetchOptions = {
-    method: "DELETE",
+    method: "POST",
+    mode: "cors",
   };
-  fetch(BACKEND + "/trajets/"+numTrajet, fetchOptions)
+  fetch('/services/trajets/annuler?numtrajet='+numTrajet, fetchOptions)
       .then((response) => {
         console.log(response)
         chargeTrajetsRecherchePointArrivee()

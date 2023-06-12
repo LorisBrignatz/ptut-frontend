@@ -20,7 +20,7 @@ const listeTrajets = reactive([]);
       });
  */
 function chargeTrajets() {
-
+  const currentDate = new Date(); // Obtient la date actuelle
   const fetchOptions = { method: "GET" };
   fetch(BACKEND+'/trajets', fetchOptions)
       .then((response) => {
@@ -31,7 +31,11 @@ function chargeTrajets() {
         console.log(dataJSON);
         listeTrajets.splice(0, listeTrajets.length);
         dataJSON._embedded.trajets.forEach((trajets) => {
-          listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heuredepart, trajets.datefin));
+          if(new Date(trajets.datedepart) > currentDate) {
+            listeTrajets.push(new Trajet(trajets.numtrajet, trajets.userid, trajets.idpointdepart, trajets.idpointarrivee, trajets.datedepart, trajets.heuredepart, trajets.datefin));
+          }else {
+            deleteTrajet(trajets.numtrajet);
+          }
       })})
       .catch((error) => console.log(error));
 
@@ -44,9 +48,10 @@ function chargeTrajets() {
  */
 function deleteTrajet(numTrajet) {
   const fetchOptions = {
-    method: "DELETE",
+    method: "POST",
+    mode: "cors",
   };
-  fetch(BACKEND + "/trajets/"+numTrajet, fetchOptions)
+  fetch('/services/trajets/annuler?numtrajet='+numTrajet, fetchOptions)
       .then((response) => {
         console.log(response)
         chargeTrajets()

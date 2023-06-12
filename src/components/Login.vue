@@ -6,13 +6,11 @@
       </div>
       <Form class="form-add" @submit="handleLogin" :validation-schema="schema">
         <div class="form-group">
-          <label for="username">Username</label>
-          <Field name="username" type="text" class="form-control" />
+          <Field name="username" type="text" class="form-control" placeholder="Username" />
           <ErrorMessage name="username" class="error-feedback" />
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
-          <Field name="password" type="password" class="form-control" />
+          <Field name="password" type="password" class="form-control" placeholder="Mot de passe"/>
           <ErrorMessage name="password" class="error-feedback" />
         </div>
 
@@ -32,6 +30,19 @@
           </div>
         </div>
       </Form>
+      <p @click="sendMailForm= true" >Mot de passe oublié</p>
+      <form v-if="sendMailForm">
+        <div class="form-group">
+          <Field v-model="email" name="mail" type="mail" class="form-control" placeholder="Votre email"/>
+
+        </div>
+        <div class="form-group buttonLogin">
+
+          <button class="login-button" @click="SendMail">
+            Envoyer
+          </button>
+        </div>
+      </form>
       <p>Pas encore membre ?</p>
       <a href="/register"> Inscription</a>
     </div>
@@ -43,6 +54,8 @@
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import RegisterView from "@/views/RegisterView.vue";
+import axios from "axios";
+import {BACKEND} from "@/api";
 
 export default {
   name: "Login",
@@ -56,12 +69,14 @@ export default {
     const schema = yup.object().shape({
       username: yup.string().required("Username is required!"),
       password: yup.string().required("Password is required!"),
+      email: ""
     });
 
     return {
       loading: false,
       message: "",
       schema,
+      sendMailForm: false,
     };
   },
   computed: {
@@ -93,6 +108,21 @@ export default {
           }
       );
     },
+    SendMail(){
+      fetch(BACKEND + '/auth/sendMailPassword?mail='+ this.email, {
+        method: "POST"})
+          .then((response) => {
+            alert("fetch response")
+
+            console.log(response);
+            return response.json();
+          })
+          .then((dataJSON) => {
+            console.log(dataJSON);
+          })
+          .catch((error) => console.log(error));
+
+    }
   },
 
 };
@@ -111,6 +141,7 @@ p{
 .error-feedback{
   color: #cab174;
   font-size: smaller;
+
 }
 h2 {
   font-family: 'Blinker', sans-serif;
@@ -131,7 +162,7 @@ h2 {
   width: 100%;
 }
 
-Field[type="text"], Field[type="password"] {
+input[type="text"], input[type="password"], input[type="mail"] {
   width: 100%;
   border: none;
   border-bottom: 1px solid #ccc;

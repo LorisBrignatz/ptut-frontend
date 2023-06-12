@@ -5,15 +5,7 @@ import axios from "axios";
 import Trajet from "../Trajet.js";
 import TrajetItem from "@/components/TrajetItem.vue"
 
-/*
-let data = reactive({
-  // Les données saisies dans le formulaire
-  formulaireCategorie: { ...categorieVide },
-  // La liste des catégories affichée sous forme de table
-  listeTrajets: []
-});
 
- */
 const listeTrajetsRes = reactive([]);
 function chargeTrajetsRecherchePointArrivee(nomParrivee) {
   const fetchOptions = { method: "GET" };
@@ -69,11 +61,6 @@ function chargeTrajetsRecherchePointArrivee(nomParrivee) {
    */
 }
 
-
-/**
- * Supprime une entité
- * @param entityRef l'URI de l'entité à supprimer
- */
 
 // A l'affichage du composant, on affiche la liste
 onMounted(chargeTrajetsRecherchePointArrivee);

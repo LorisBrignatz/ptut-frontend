@@ -7,28 +7,23 @@
       <Form class="form-add" @submit="handleRegister" :validation-schema="schema">
         <div v-if="!successful">
           <div class="form-group">
-            <label for="username">Username</label>
-            <Field name="username" type="text" class="form-control" />
+            <Field name="username" type="text" class="form-control" placeholder="Username"/>
             <ErrorMessage name="username" class="error-feedback" />
           </div>
           <div class="form-group">
-            <label for="email">Email</label>
-            <Field name="email" type="email" class="form-control" />
+            <Field name="email" type="email" class="form-control" placeholder="E-mail"/>
             <ErrorMessage name="email" class="error-feedback" />
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <Field name="password" type="password" class="form-control" />
+            <Field name="password" type="password" class="form-control" placeholder="Mot de passe"/>
             <ErrorMessage name="password" class="error-feedback" />
           </div>
           <div class="form-group">
-            <label for="nom">Nom</label>
-            <Field name="nom" type="text" class="form-control" />
+            <Field name="nom" type="text" class="form-control" placeholder="Nom"/>
             <ErrorMessage name="nom" class="error-feedback" />
           </div>
           <div class="form-group">
-            <label for="prenom">Prenom</label>
-            <Field name="prenom" type="text" class="form-control" />
+            <Field name="prenom" type="text" class="form-control" placeholder="Prenom"/>
             <ErrorMessage name="prenom" class="error-feedback" />
           </div>
 
@@ -170,7 +165,7 @@ h2 {
   width: 100%;
 }
 
-Field[type="text"], Field[type="password"] {
+input[type="text"], input[type="password"], input[type="email"],  {
   width: 100%;
   border: none;
   border-bottom: 1px solid #ccc;

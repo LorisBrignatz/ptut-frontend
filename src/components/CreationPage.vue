@@ -1,26 +1,104 @@
-<script>
+<script setup>
+import {onMounted, reactive, ref} from "vue";
+import {BACKEND} from "@/api";
+
+const pointsDepartListe = reactive([]);
+const pointsArriveeListe = reactive([]);
+const pointdepart = ref('');
+const pointarrivee = ref('');
+
+function chargePointsContaining(){
+  const fetchOptions = {method: "GET", mode:'cors'};
+  const url = '/api/points/search/findByNomContaining?substring=' + pointdepart.value;
+  //console.log(url)
+  fetch(url, fetchOptions)
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        pointsDepartListe.splice(0, pointsDepartListe.length);
+        dataJSON._embedded.points.forEach((point) => {
+          pointsDepartListe.push(point.nom);
+        })
+      })
+      .catch((error) => console.log(error));
+
+}
+function chargePointsContainingArrivee(){
+  const fetchOptions = {method: "GET", mode:'cors'};
+  const url = '/api/points/search/findByNomContaining?substring=' + pointarrivee.value;
+  //console.log(url)
+  fetch(url, fetchOptions)
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        pointsArriveeListe.splice(0, pointsArriveeListe.length);
+        dataJSON._embedded.points.forEach((point) => {
+          pointsArriveeListe.push(point.nom);
+        })
+      })
+      .catch((error) => console.log(error));
+
+}
+
+function chargePoints(){
+  const fetchOptions = {method: "GET", mode:'cors'};
+  const url = BACKEND+'/points?page=0&size=1000';
+  //console.log(url)
+  fetch(url, fetchOptions)
+      .then((response) => {
+        console.log(response)
+        return response.json();
+      })
+      .then((dataJSON) => {
+        console.log(dataJSON);
+        pointsDepartListe.splice(0, pointsDepartListe.length);
+        pointsArriveeListe.splice(0, pointsDepartListe.length);
+
+        dataJSON._embedded.points.forEach((point) => {
+          pointsDepartListe.push(point.nom);
+        })
+        dataJSON._embedded.points.forEach((point) => {
+          pointsArriveeListe.push(point.nom);
+        })
+      })
+      .catch((error) => console.log(error));
+
+}
+onMounted(() => {
+  chargePoints();
+})
 </script>
 
 <template>
   <h2>Créez un trajet</h2>
   <div class="create-container">
-    <form class="form-add" @submit.prevent="$emit('addT',nom, prenom, pointdepart, pointarrivee, date, heure)">
+    <form class="form-add" @submit.prevent="$emit('addT', this.$refs.pointdepartSelect.value, this.$refs.pointarriveeSelect.value, date, heure)">
       <div class="form-group">
-        <input type="text" v-model="nom" placeholder="Nom" />
-        <i class="material-icons-outlined">badge</i>
+        <div>
+          <input type="text" v-model="pointdepart" @input="chargePointsContaining" placeholder="Point de départ" />
+          <i class="material-icons-outlined">location_on</i>
+        </div>
+        <select ref="pointdepartSelect">
+          <option v-for="point in pointsDepartListe" :value="point">{{ point }}</option>
+        </select>
       </div>
+
       <div class="form-group">
-        <input type="text" v-model="prenom" placeholder="Prenom" />
-        <i class="material-icons-outlined">badge</i>
+        <div>
+          <input type="text" v-model="pointarrivee" @input="chargePointsContainingArrivee" placeholder="Point d'arrivée" />
+          <i class="material-icons-outlined">location_on</i>
+        </div>
+        <select ref="pointarriveeSelect">
+          <option v-for="point in pointsArriveeListe" :value="point">{{ point }}</option>
+        </select>
       </div>
-      <div class="form-group">
-        <input type="text" v-model="pointdepart" placeholder="Point de départ" />
-        <i class="material-icons-outlined">location_on</i>
-      </div>
-      <div class="form-group">
-        <input type="text" v-model="pointarrivee" placeholder="Point d'arrivée" />
-        <i class="material-icons-outlined">location_on</i>
-      </div>
+
       <div class="form-group">
         <input type="date" v-model="date" placeholder="Date de départ" />
         <i class="material-icons-outlined">event</i>
@@ -115,4 +193,46 @@ input[type="time"]::-webkit-clear-button {
 input[type="time"]::-webkit-inner-spin-button {
   display: none;
 }
+
+select {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 8px;
+  font-size: 16px;
+  font-family: 'Blinker', sans-serif;
+  color: #666;
+  appearance: none; /* Masquer l'apparence par défaut du sélecteur */
+  background-color: transparent; /* Fond transparent */
+}
+
+select:focus {
+  outline: none; /* Supprimer l'effet de focus par défaut */
+}
+
+select::-ms-expand {
+  display: none; /* Masquer la flèche de déroulement pour les navigateurs Internet Explorer */
+}
+
+.select-icon {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  color: #ccc;
+}
+
+/* Style personnalisé pour les options du sélecteur */
+select option {
+  background-color: #ffffff;
+  color: #666;
+  font-family: 'Blinker', sans-serif;
+}
+
+/* Style personnalisé pour l'option sélectionnée */
+select option:checked {
+  background-color: #cab174;
+  color: #fff;
+}
+
 </style>

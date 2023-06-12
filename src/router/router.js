@@ -7,6 +7,7 @@ import RequestView from '../views/RequestView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
+import newPasswordView from "@/views/newPasswordView.vue";
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -44,12 +45,17 @@ const router = createRouter({
             path: '/register',
             name: 'register',
             component: RegisterView
+        },
+        {
+            path: '/newPassword',
+            name: 'newPassword',
+            component: newPasswordView
         }
     ]
 })
 export default router
 router.beforeEach((to, from, next) => {
-    const publicPages = ['/login', '/register'];
+    const publicPages = ['/login', '/register', '/newPassword'];
     const authRequired = !publicPages.includes(to.path);
     const loggedIn = localStorage.getItem('user');
 

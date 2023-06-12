@@ -12,6 +12,7 @@ const router = useRouter();
 
 const { user } = store.state.auth;
 const currentUser = user;
+let trajetComplet = false;
 
 
 const props = defineProps({
@@ -88,11 +89,16 @@ function getPassagers(){
       })
       .then((dataJSON) => {
         console.log(dataJSON);
+        userIDs.splice(0, userIDs.length);
         dataJSON._embedded.passagerses.forEach((passager) =>{
           //console.log(passager.userid)
-          userIDs.splice(0, userIDs.length);
+
           userIDs.push(passager.userid);
           console.log("La liste  " +userIDs)
+          if( userIDs.length >=3 ){
+            trajetComplet =true;
+          }
+        });
           people.splice(0, people.length);
           for (const userId of userIDs) {
             fetch(BACKEND+'/utilisateurs/search/findByUserid?userid=' + userId, {method: "GET"})
@@ -111,7 +117,7 @@ function getPassagers(){
                 })
                 .catch((error) => console.log(error));
           }
-        });
+
       })
       .catch((error) => console.log(error));
 
@@ -130,11 +136,13 @@ function supprPassager() {
         fetch(BACKEND + "/passagerses/" + dataJSON.id
             , {method: "DELETE", mode: 'cors'})
             .then((response) => {
+              getPassagers();
+
               console.log(response)
-              setTimeout(() => {
-                getPassagers();
-                window.location.reload();
-              }, 500);
+              //setTimeout(() => {
+                //getPassagers();
+              //  window.location.reload();
+             // }, 500);
               return response.json();
 
             })
@@ -204,7 +212,8 @@ onMounted(() => {
     </div>
     <div class="trip-buttons-delete"> <!--$emit(trajet.numTrajet)-->
       <button class="reserve-button" @click="showPopup = true" v-if="currentUser.userid == trajet.conducteur">Voir les passagers</button>
-      <button class="reserve-button" v-if="!userIDs.includes(currentUser.userid) && currentUser.userid != trajet.conducteur" @click="ajoutPassager">Réserver ce trajet</button>
+      <button class="reserve-button" v-if="!userIDs.includes(currentUser.userid) && currentUser.userid != trajet.conducteur && trajetComplet == false" @click="ajoutPassager">Réserver ce trajet</button>
+      <button class="reserve-button" v-if="!userIDs.includes(currentUser.userid) && currentUser.userid != trajet.conducteur && trajetComplet == true" disabled>Complet</button>
       <button class="reserve-button" v-if="userIDs.includes(currentUser.userid) && currentUser.userid != trajet.conducteur" @click="supprPassager" >Annuler ma réservation</button>
 
       <button class="delete-button" @click="$emit('deleteC', trajet.numTrajet)" v-if="currentUser.userid == trajet.conducteur">Annuler ce trajet</button>

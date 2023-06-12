@@ -7,10 +7,17 @@ import {ref} from "vue";
 import Trajet from "@/Trajet";
 const ajoutReussi = ref(false)
 const erreurCreation = ref(false)
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
-function ajouterTrajet(nom, prenom, pointdepart, pointarrivee, date, heure) { //titre, prix, qtestock
-  console.log(nom, prenom, pointdepart, pointarrivee, date, heure);
-  fetch('/services/trajets/ajouter?nom=' + nom + '&prenom=' + prenom
+const store = useStore();
+const router = useRouter();
+
+const { user } = store.state.auth;
+const currentUser = user;
+function ajouterTrajet( pointdepart, pointarrivee, date, heure) { //titre, prix, qtestock
+  console.log(pointdepart, pointarrivee, date, heure);
+  fetch('/services/trajets/ajouter?userid=' + currentUser.userid
       + "&nompointdepart=" + pointdepart + "&nompointarrivee=" + pointarrivee + "&date=" + date + "&heure=" + heure
       //fetch('/services/trajets/ajouter'
       , {
