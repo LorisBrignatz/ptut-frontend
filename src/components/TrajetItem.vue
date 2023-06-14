@@ -1,11 +1,12 @@
 <script setup>
 import Trajet from "@/Trajet";
 import {onMounted, ref, defineProps, reactive} from "vue";
-import {BACKEND} from "@/api";
+import {BACKEND, BACKENDPOST} from "@/api";
 import PassagersComponents from "@/components/PassagersComponents.vue";
 
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import axios from "axios";
 
 const store = useStore();
 const router = useRouter();
@@ -159,7 +160,7 @@ function supprPassager() {
 
 
 function ajoutPassager (){
-  fetch('/services/passagers/ajouter?userid='+ currentUser.userid+'&numTrajet=' + props.trajet.numTrajet, {
+  fetch(BACKENDPOST+'/services/passagers/ajouter?userid='+ currentUser.userid+'&numTrajet=' + props.trajet.numTrajet, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

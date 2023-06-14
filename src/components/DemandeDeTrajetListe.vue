@@ -1,5 +1,5 @@
 <script setup>
-import {BACKEND} from "@/api";
+import {BACKEND, BACKENDPOST} from "@/api";
 import {onMounted, reactive, ref} from "vue";
 import DemandeDeTrajetItem from "@/components/DemandeDeTrajetItem.vue";
 import DemandeDeTrajet from "@/DemandeDeTrajet";
@@ -58,7 +58,7 @@ function deleteTrajet(numTrajet) {
 
 function checkDemande(numTrajet){
   console.log(numTrajet)
-  const url = '/services/demandeDeTrajets/valider?nom=' + currentUser.nom + '&prenom=' + currentUser.prenom +"&numTrajet="+ numTrajet
+  const url = BACKENDPOST+'/services/demandeDeTrajets/valider?nom=' + currentUser.nom + '&prenom=' + currentUser.prenom +"&numTrajet="+ numTrajet
   console.log(url)
   fetch(url, {
         method: 'POST',
@@ -87,7 +87,7 @@ function checkDemande(numTrajet){
 }
 function posterDemande(pointdepart, pointarrivee, date, heure) { //titre, prix, qtestock
   console.log(pointdepart, pointarrivee, date, heure);
-  fetch('/services/demandeDeTrajets/ajouter?userid=' + currentUser.userid
+  fetch(BACKENDPOST+'/services/demandeDeTrajets/ajouter?userid=' + currentUser.userid
       + "&nompointdepart=" + pointdepart + "&nompointarrivee=" + pointarrivee + "&date=" + date + "&heure=" + heure
       //fetch('/services/trajets/ajouter'
       , {

@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, onMounted } from "vue";
-import { BACKEND, doAjaxRequest } from "../api";
+import { BACKEND, BACKENDPOST } from "../api";
 import axios from "axios";
 import Trajet from "../Trajet.js";
 import TrajetItem from "@/components/TrajetItem.vue"
@@ -54,7 +54,7 @@ function deleteTrajet(numTrajet) {
     method: "POST",
     mode: "cors",
   };
-  fetch('/services/trajets/annuler?numtrajet='+numTrajet, fetchOptions)
+  fetch(BACKENDPOST+'/services/trajets/annuler?numtrajet='+numTrajet, fetchOptions)
       .then((response) => {
         console.log(response)
         chargeTrajets()
