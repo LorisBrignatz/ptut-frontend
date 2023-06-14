@@ -76,7 +76,7 @@ onMounted(() => {
 <template>
 
   <div class="create-container">
-    <form class="form-add" @submit.prevent="$emit('AddRequest', this.$refs.pointdepartSelect.value, this.$refs.pointarriveeSelect.value, date, heure)">
+    <form class="form-add" @submit.prevent="$emit('AddRequest', $refs.pointdepartSelect.value, $refs.pointarriveeSelect.value, date, heure)">
       <div class="form-group">
         <div>
           <input type="text" v-model="pointdepart" @input="chargePointsContaining" placeholder="Point de départ" />
