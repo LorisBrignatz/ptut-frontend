@@ -9,7 +9,7 @@ const pointarrivee = ref('');
 
 function chargePointsContaining(){
   const fetchOptions = {method: "GET", mode:'cors'};
-  const url = '/api/points/search/findByNomContaining?substring=' + pointdepart.value;
+  const url = BACKEND+'/points/search/findByNomContaining?substring=' + pointdepart.value;
   //console.log(url)
   fetch(url, fetchOptions)
       .then((response) => {
@@ -28,7 +28,7 @@ function chargePointsContaining(){
 }
 function chargePointsContainingArrivee(){
   const fetchOptions = {method: "GET", mode:'cors'};
-  const url = '/api/points/search/findByNomContaining?substring=' + pointarrivee.value;
+  const url = BACKEND+'/points/search/findByNomContaining?substring=' + pointarrivee.value;
   //console.log(url)
   fetch(url, fetchOptions)
       .then((response) => {

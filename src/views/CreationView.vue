@@ -1,6 +1,6 @@
 <script setup>
 import CreationPage from "../components/CreationPage.vue";
-import {BACKEND} from "@/api";
+import {BACKEND, BACKENDPOST} from "@/api";
 import axios from "axios";
 import TrajetItem from "@/components/TrajetItem.vue";
 import {ref} from "vue";
@@ -17,7 +17,7 @@ const { user } = store.state.auth;
 const currentUser = user;
 function ajouterTrajet( pointdepart, pointarrivee, date, heure) { //titre, prix, qtestock
   console.log(pointdepart, pointarrivee, date, heure);
-  fetch('/services/trajets/ajouter?userid=' + currentUser.userid
+  fetch(BACKENDPOST+'/services/trajets/ajouter?userid=' + currentUser.userid
       + "&nompointdepart=" + pointdepart + "&nompointarrivee=" + pointarrivee + "&date=" + date + "&heure=" + heure
       //fetch('/services/trajets/ajouter'
       , {

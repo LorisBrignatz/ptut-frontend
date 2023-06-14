@@ -1,6 +1,6 @@
 
 const BACKEND = 'https://lescopaings.azurewebsites.net/api';
-const BACKENDS = 'http://localhost:8989'
+export const BACKENDPOST = 'https://lescopaings.azurewebsites.net/';
 
 /**
  * Faire un appel AJAX avec l'API fetch
