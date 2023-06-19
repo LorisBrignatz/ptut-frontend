@@ -9,21 +9,10 @@ const emit = defineEmits(["search"]);
   <div class="search-container">
     <form @submit.prevent="$emit('search',pointarrivee )">
       <div class="input-container">
-        <input type="text" v-model="pointdepart" placeholder="Point de départ" />
-        <i class="material-icons-outlined">location_on</i>
-      </div>
-      <div class="input-container">
         <input type="text" v-model="pointarrivee" placeholder="Point d'arrivée" />
         <i class="material-icons-outlined">location_on</i>
       </div>
-      <div class="input-container">
-        <input type="date" v-model="date" placeholder="Date de départ" />
-        <i class="material-icons-outlined">event</i>
-      </div>
-      <div class="input-container">
-        <input type="time" v-model="heure" placeholder="Heure de départ" />
-        <i class="material-icons-outlined">access_time</i>
-      </div>
+
       <div class="input-button-search">
         <button class="search-button" @click="$emit('search', { _pointdepart: pointdepart, _pointarrivee: pointarrivee, _date: date, _heure: heure })">Rechercher</button>
       </div>
