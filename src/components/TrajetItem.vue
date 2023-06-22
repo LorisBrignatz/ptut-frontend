@@ -30,7 +30,7 @@ const nomP = ref('');
 const prenomP = ref('');
 const userIDs = reactive([])
 const people = reactive([])
-
+const site = ref('');
 
 function getName(){
   const fetchOptions = {method: "GET", mode:'cors'};
@@ -45,8 +45,11 @@ function getName(){
       .then((dataJSON) => {
         //console.log(dataJSON);
         name.value = dataJSON.nom + ' ' + dataJSON.prenom;
+        site.value = dataJSON.idPointSite;
       })
       .catch((error) => console.log(error));
+
+
 }
 function getPointDepart(){
   const fetchOptions = {method: "GET", mode:'cors'};
@@ -95,7 +98,7 @@ function getPassagers(){
           //console.log(passager.userid)
 
           userIDs.push(passager.userid);
-          console.log("La liste  " +userIDs)
+          //console.log("La liste  " +userIDs)
           if( userIDs.length >=3 ){
             trajetComplet =true;
           }
@@ -109,11 +112,12 @@ function getPassagers(){
                 })
                 .then((dataJSON) => {
                   //console.log(dataJSON);
-                  console.log(dataJSON.nom)
+                  //console.log(dataJSON.nom)
 
                   people.push({
                     firstName: dataJSON.prenom,
-                    lastName: dataJSON.nom
+                    lastName: dataJSON.nom,
+                    idPointSite: dataJSON.idPointSite
                   });
                 })
                 .catch((error) => console.log(error));
@@ -193,7 +197,7 @@ onMounted(() => {
 <template>
   <div class="trip">
     <div class="trip-details">
-      <h2 class="trip-driver">{{ name }}</h2>
+      <h2 class="trip-driver">{{ name }} - <span v-if="site==1"> BOUSQU </span><span v-if="site==2">ROSBET</span> </h2>
       <div class="icon-text-container">
         <i class="material-icons-outlined">location_on</i>
         <p class="trip-start">Départ: {{ pointdepartName }}</p>
@@ -229,7 +233,7 @@ onMounted(() => {
 
       <h3>Déjà enregistré(s) :</h3>
         <p v-for="person in people">
-          {{ person.firstName }} {{ person.lastName }}
+          {{ person.firstName }} {{ person.lastName }} - <span v-if="person.idPointSite==1"> BOUSQU </span><span v-if="person.idPointSite==2">ROSBET</span>
         </p>
       <div class="input-button">
         <button type="button" @click="showPopup = false" class="reserve-button">Fermer</button>

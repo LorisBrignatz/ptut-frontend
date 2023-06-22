@@ -26,6 +26,15 @@
             <Field name="prenom" type="text" class="form-control" placeholder="Prenom"/>
             <ErrorMessage name="prenom" class="error-feedback" />
           </div>
+          <div class="form-group">
+            <p class="label">Votre établissement :</p>
+
+            <Field name="site" as="select">
+              <option value="IME/SMR bousquairol">IME/SMR bousquairol</option>
+              <option value="MAS rosine bet">MAS rosine bet</option>
+            </Field>
+            <ErrorMessage name="site" class="error-feedback" />
+          </div>
 
           <div class="form-group buttonRegister">
             <button class="register-button" :disabled="loading">
@@ -55,6 +64,7 @@
 <script>
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
+import {ref} from "vue";
 
 export default {
   name: "Register",
@@ -86,13 +96,19 @@ export default {
       prenom: yup
           .string()
           .required("Surname is required!"),
+      site: yup
+          .mixed()
+          .oneOf(["IME/SMR bousquairol", "MAS rosine bet"], "Site is required!")
+          .required("Location is required!"),
+
     });
 
     return {
       successful: false,
       loading: false,
       message: "",
-      schema,
+      site: "",
+      schema
     };
   },
   computed: {
@@ -135,10 +151,11 @@ export default {
 
 <style scoped>
 
-label {
-  color: black;
-  padding-right: 10px;
-}
+.label {
+   padding-right: 10px;
+   font-family: 'Blinker', sans-serif;
+   color: #ada4a3;
+ }
 p{
   color: black;
 }
@@ -165,7 +182,7 @@ h2 {
   width: 100%;
 }
 
-input[type="text"], input[type="password"], input[type="email"],  {
+input[type="text"], input[type="password"], input[type="email"]  {
   width: 100%;
   border: none;
   border-bottom: 1px solid #ccc;
@@ -233,4 +250,46 @@ logo {
   justify-content: center;
 
 }
+
+select {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 8px;
+  font-size: 16px;
+  font-family: 'Blinker', sans-serif;
+  color: #666;
+  appearance: none; /* Masquer l'apparence par défaut du sélecteur */
+  background-color: transparent; /* Fond transparent */
+}
+
+select:focus {
+  outline: none; /* Supprimer l'effet de focus par défaut */
+}
+
+select::-ms-expand {
+  display: none; /* Masquer la flèche de déroulement pour les navigateurs Internet Explorer */
+}
+
+.select-icon {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  color: #ccc;
+}
+
+/* Style personnalisé pour les options du sélecteur */
+select option {
+  background-color: #ffffff;
+  color: #666;
+  font-family: 'Blinker', sans-serif;
+}
+
+/* Style personnalisé pour l'option sélectionnée */
+select option:checked {
+  background-color: #cab174;
+  color: #fff;
+}
+
 </style>
