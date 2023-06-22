@@ -29,7 +29,8 @@ class AuthService {
             email: user.email,
             password: user.password,
             nom: user.nom,
-            prenom: user.prenom
+            prenom: user.prenom,
+            nomSite : user.site
         });
     }
 }
